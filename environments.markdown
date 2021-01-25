@@ -1,7 +1,7 @@
 ---
 layout: page
-title: Setting up your environment
-permalink: /setup/
+title: Environment setup
+permalink: /environment-setup/
 nav_order: 2
 ---
 # Setting up your environment
