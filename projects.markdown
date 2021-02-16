@@ -28,11 +28,70 @@ datalad run -m "ran my script" -i my_inputs -o my_outputs ./my_script.sh "{input
 ```
 Once you've run your analysis with datalad run, make sure your results are reproducible by running `datalad rerun`. Code can be unreproducible in very non-obvious ways (for example, the default way of setting a seed won't work in R if your code is multithreaded), so running twice is the only way to make sure your analysis is reproducible.
 
-Like many neuroimaging tools, scaling datalad to work with large datasets presents additional challenges. Performance can be prohibitively slow, so it's important to break data into subdatasets. To create a subdataset, run `datalad create -d . subdataset` where `.` is your parent dataset. Datalad uses git submodules to relate your parent dataset to its subdatasets, which record the path to the subdataset and which commit it's on. So when committing changes in subdatasets, you will need to make a commit in every parent dataset that you want to update the commit it's on (datalads `-r` flag is useful for this).
+### Datalad caveats
+Like many neuroimaging tools, scaling datalad to work with large datasets presents additional challenges. Git can only handle so many files per repository, so it's important to break data into subdatasets, but there's also a practical limit on the number of subdatasets per dataset, so very large projects may need to restructure flat directory trees into many layers of nested subdatasets.
+
+To create a subdataset, run `datalad create -d . subdataset` where `.` is your parent dataset. Datalad uses git submodules to relate your parent dataset to its subdatasets, which record the path to the subdataset and which commit it's on. So when committing changes in subdatasets, you will need to make a commit in every parent dataset that you want to update the commit it's on (datalad save's `-r` flag is useful for this).
 
 Since datalad monitors all files for changes parallelizing datalad run commands can be difficult as datalad doesn't know which files correspond to which runs. There are two workarounds. The simpler way is to use the `--explicit` flag to tell datalad to only monitor changes in the inputs and outputs provided by the `-i` and `-o` arguments. The more robust way is to checkout a new branch for every run command, and octopus merge them at the end.
 
-Although most projects reside on network-mounted directories, datalads decentralized nature makes it easy to move files to a more performant filesystem (like `$TMPDIR`) then have results pushed back.
+Although most projects reside on network-mounted directories, datalads decentralized nature makes it easy to move files to a more performant filesystem (like `$TMPDIR`) then have results pushed back. For example,
+
+```sh
+#!/bin/bash
+
+# fail whenever something is fishy, use -x to get verbose logfiles
+set -e -u -x
+
+ds_path=$(realpath $(dirname $0)/..) # assuming were in ./code
+sub=$1 # script meant to be called with subject id as first (only) argument
+# $TMPDIR is a more performant local filesystem
+wrkDir=$TMPDIR/$LSB_JOBID
+# or, on SGE, wrkDir=$TMPDIR/$JOB_ID
+mkdir -p $wrkDir
+cd $wrkDir
+# get the output/input datasets
+# flock makes sure that this does not interfere with another job
+# finishing at the same time, and pushing its results back
+# we clone from the location that we want to push the results too
+# $DSLOCKFILE should be exported, it simply points to an empty file in .git used as a lock
+flock $DSLOCKFILE datalad clone $ds_path ds
+# all following actions are performed in the context of the superdataset
+cd ds
+# obtain datasets
+datalad get -r sourcedata/${sub}/dicoms
+datalad get nifti
+datalad get -r nifti/sub-${sub}
+datalad get simg/heudiconv_latest.sif
+# let git-annex know that we do not want to remember any of these clones
+# (we could have used an --ephemeral clone, but that might deposite data
+# of failed jobs at the origin location, if the job runs on a shared
+# filesystem -- let's stay self-contained)
+git submodule foreach --recursive git annex dead here
+
+# checkout new branches
+# this enables us to store the results of this job, and push them back
+# without interference from other jobs
+git -C nifti checkout -b "sub-${sub}"
+git -C nifti/sub-$sub checkout -b "sub-${sub}"
+
+# yay time to run
+datalad run -i "sourcedata/${sub}" -i "simg" -o "nifti" \
+    singularity run --cleanenv \
+    -B /project -B $TMPDIR \
+    $PWD/simg/heudiconv_latest.sif \
+    -d "$PWD/sourcedata/MSDC_{{subject}}/dicoms/*/*.dcm" \
+    -o $PWD/nifti -f $PWD/code/myheuristic.py -s $sub -ss 01 -c dcm2niix -b
+
+# selectively push outputs only
+# ignore root dataset, despite recorded changes, needs coordinated
+# merge at receiving end
+flock $DSLOCKFILE datalad push -r -d nifti --to origin
+
+cd ../..
+chmod -R 777 $wrkDir
+rm -rf $wrkDir
+```
 
 For more information, the [datalad handbook](http://handbook.datalad.org/en/latest/index.html) is an excellent resource.
 
