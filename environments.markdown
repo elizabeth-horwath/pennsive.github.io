@@ -5,7 +5,7 @@ permalink: /environment-setup/
 nav_order: 2
 ---
 # Setting up your environment
-Neuroimaging software can be difficult to install and have complex dependencies. If any tool has a different version or is configured differently, results can become impossible to reproduce. Containers are like lightweight VMs that turns your environment into code so it can be shared, version controlled, and reproduced on any machine that supports a container runtime. On platforms where you have root access (like your computer), docker is the most convenient container runtime, but Singularity is a good alternative for rootless containers in cluster environments. 
+Neuroimaging software can be difficult to install and have complex dependencies. If any tool has a different version or is configured differently, results can become impossible to reproduce. So we use containers which are like lightweight VMs that turn your environment into code so it can be shared, version controlled, and reproduced on any machine that supports a container runtime. On platforms where you have root access (like your computer), docker is the most convenient container runtime, but Singularity is a good alternative for rootless containers in cluster environments. 
 
 There are some general purpose container images you can pull to do experimenting, but new projects with public results should create a project-specific container by writing a Dockerfile. NeuroDocker automates much of this process,
 ```sh
@@ -59,7 +59,9 @@ Try creating a SSH tunnel for HTTP traffic (`takimhttp` or `cbicahttp`) then sta
 ## Development on the cluster
 The PMACS cluster is generally more amicable to interactive work while CUBIC is generally better for large batch and GPU jobs. Singularity is installed on both clusters, but on PMACS it's installed as an environment module so you need to run `module load DEV/singularity` first.
 
-Singularity commands have different semantics than docker commands, but also follow the general format `singularity run [options for singularity] image_name [payload process arguments]`. The singularity equivalent of `-it` is `singularity shell` (instead of `singularity run`), instead of `-v` it's `-B`, instead of `-w` it's `--pwd`. Additionally, singularity by default does less to isolate the container than docker does, so you'll likely always need the `--cleanenv` or `--containall` flags to prevent host environment variables from overwriting those in the container. 
+Singularity commands have different semantics than docker commands, but also follow the general format `singularity run [options for singularity] image_name [payload process arguments]`. The singularity equivalent of `-it` is `singularity shell` (instead of `singularity run`), instead of `-v` it's `-B`, instead of `-w` it's `--pwd`.
+
+Beyond semantics there are a couple major difference between docker and singularity. First, singularity by default does less to isolate the container than docker does, so you'll likely always need the `--cleanenv` or `--containall` flags to prevent host environment variables from overwriting those in the container. Moreover, it's good practice to make explicit the environment variables your program uses. Second, all paths in a singularity container are read-only unless that path is bind mounted. Third, singularity bind mounts your current working directory and home directory by default. `/scratch`, the default `$TMDIR` on the clusters, is not bind mounted by default so it's you'll likely always need to include `-B /scratch` in your singularity command.
 
 ### PMACS
 PMACS uses the LSF platform, which uses `bsub` to submit jobs. To submit an interactive job, run `bsub -Is -q "$QUEUE"_interactive 'bash';`. To run a non-interactive job, run `bsub -o /path/to/stdout -e /path/to/stderr ./my_job.sh`

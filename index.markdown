@@ -22,4 +22,6 @@ When setting up a project meant for publication, read through the [project setup
 
 For more specific python neuroimaging tutorials, see the many [nipype examples](https://nipype.readthedocs.io/en/latest/examples.html). For more specific R neuroimaging tutorials, see [neuroconductor](https://neuroconductor.org/tutorials).
 
+The [CBICA wiki](https://cbica-wiki.uphs.upenn.edu) (UPHS VPN required) is a good resource for CUBIC-specific tutorials, and [Ali's blog](https://www.alessandravalcarcel.com/blog/) offers lots of useful PMACS-specific information.
+
 Also see the [PennLINC internal website](https://pennlinc.github.io) which offers many useful tutorials and tips.

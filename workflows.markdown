@@ -2,7 +2,7 @@
 layout: page
 title: Nipype workflows
 permalink: /workflows/
-nav_order: 4
+nav_order: 7
 ---
 # Nipype workflows
 Many neuroimaging tools have idiosyncratic CLIs that are clumsy to use from programming languages like python and R. Nipype provides a unified interface that facilitates the design of workflows within and between packages, lowering the learning curve necessary to use a new package.
