@@ -9,7 +9,7 @@ When labs organize datasets in different ways time is often wasted rewriting scr
 
 Although it's possible to manually organize NIFTIs into the BIDS structure, doing so is error-prone and inefficient. Manual organization may be the only option if dicoms aren't available, but otherwise you can use heudiconv to automatically format the produced NIFTIs according to BIDS.
 
-Unlike `dcm2niix` which can simply be fed a directory of dicoms, heudiconv requires a bit more setup. First, your dicoms be organized either by StudyUID or accession_number. Then, you need to run heudiconv with the `-c none -f convertall` options to generate TSVs with dicom metadata needed to write a heuristic. Generally, the protocol_name will be the most (only?) useful field, and is used in the heuristic to determine which dicoms go together to create a NIFTI.
+Unlike `dcm2niix` which can simply be fed a directory of dicoms, heudiconv requires a bit more setup. First, your dicoms be organized either by StudyUID or accession_number. Then, you need to run heudiconv with the `-c none -f convertall` options to generate TSVs with dicom metadata needed to write a heuristic.
 
 For example,
 ```sh

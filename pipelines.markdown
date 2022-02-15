@@ -29,11 +29,16 @@ To use as a datalad bootstrap:
 ```sh
 curl -LO https://raw.githubusercontent.com/PennLINC/TheWay/main/scripts/pmacs/bootstrap-mimosa.sh
 bash bootstrap-mimosa.sh --bids-input ria+file:///path/to/bids  --container-ds /path/or/uri/to/containers
+cd mimosa/analysis
+bash code/bsub_calls.sh
+# when jobs complete
+bash code/merge_outputs.sh
 ```
 
 ## CVS
 The central vein sign (CVS) uses a lesion probability map (from MIMoSA) and a vessellness filtering process to find veins running through lesions, biomarker of MS.
-
+> [https://github.com/PennSIVE/cvs](https://github.com/PennSIVE/cvs)
+To use as a BIDS app:
 ```sh
 singularity run --cleanenv -B ${PWD} -B ${TMPDIR} \
         /path/to/image \
@@ -41,12 +46,9 @@ singularity run --cleanenv -B ${PWD} -B ${TMPDIR} \
         outputs \
         participant \
         --participant_label $sub_num \
-        --strip mass \
+        --skullstrip \
         --n4 \
-        --register \
-        --whitestripe \
         --thresh 0.25 \
-        --debug \
         --skip_bids_validator
 ```
 ## PRL (coming soon)
