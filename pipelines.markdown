@@ -5,6 +5,13 @@ permalink: /pennsive-pipelines/
 nav_order: 5
 ---
 # PennSIVE pipelines
+
+Generally we use R and develop R packages, but many of our tools have python and command-line interfaces as well.
+
+If you're building a package that uses a PennSIVE tool, or need to fine-tune parameters not exposed by the wrappers, you're best off using the R package. If you're using python you can use a rpy2-based wrapper and be able to keep parameters that represent NIFTI images in memory. If you're building a neuroimaging pipeline in python with Nipype, we have a fork with our tools called PennSIVEpype. Otherwise, it's best to use the command-line wrappers.
+
+
+
 ## MIMoSA
 MIMoSA automates multiple sclerosis (MS) lesion segmentation with just a T1w and FLAIR required.
 
@@ -51,6 +58,18 @@ singularity exec --cleanenv --bind ${PWD} --bind ${TMPDIR} \
         --whitestripe
 ```
 
+As a nipype interface:
+```py
+from nipype.interfaces.mimosa import MIMoSA
+mimosa = MIMoSA()
+mimosa.inputs.t1 = "sub-01_mimosa-0.3.0/mimosa/t1_ws.nii.gz"
+mimosa.inputs.flair = "sub-01_mimosa-0.3.0/mimosa/flair_ws.nii.gz"
+mimosa.inputs.tissue = True
+mimosa.inputs.verbose = True
+mimosa.inputs.cores = 1
+mimosa.run()
+```
+
 ## CVS
 The central vein sign (CVS) uses a lesion probability map (from MIMoSA) and a vessellness filtering process to find veins running through lesions, biomarker of MS.
 
@@ -70,6 +89,26 @@ singularity run --cleanenv --bind ${PWD} --bind ${TMPDIR} \
         --skip_bids_validator
 ```
 
+As a nipype interface:
+```py
+from nipype.interfaces.cvs import CVS
+cvs = CVS()
+cvs.inputs.t1 = "t1.nii.gz"
+cvs.inputs.flair = "flair.nii.gz"
+cvs.inputs.epi = "epi.nii.gz"
+cvs.inputs.mimosa_prob_map = "mimosa_prob_map.nii.gz"
+cvs.inputs.mimosa_bin_map = "mimosa_bin_map.nii.gz"
+cvs.inputs.candidate_lesions = "candidate_lesions.npy"
+cvs.inputs.cvs_prob_map = "prob_map.npy"
+cvs.inputs.biomarker = "biomarker.npy"
+cvs.inputs.parallel = False
+cvs.inputs.skullstripped = True
+cvs.inputs.biascorrected = True
+cvs.inputs.c3d = True
+cvs.inputs.cores = 1
+cvs.run()
+```
+
 
 ## PRL
 The presence of paramagnetic rims around lesions (PRL) is another MS biomarker.
@@ -84,6 +123,17 @@ singularity run --cleanenv --bind ${PWD} --bind ${TMPDIR} \
         outputs \
         participant \
         --participant_label $sub_num
+```
+
+As a nipype interface:
+```py
+from nipype.interfaces.prls import PRL
+prl = PRL()
+prl.inputs.prob_map = "prob_map.nii.gz"
+prl.inputs.lesion_map = "lesion_map.nii.gz"
+prl.inputs.phase = "phase.nii.gz"
+prl.inputs.disc = True
+prl.run()
 ```
 
 ## Center detection
@@ -104,4 +154,22 @@ singularity run --cleanenv --bind ${PWD} --bind ${TMPDIR} \
         --min-center-size 10 \
         --gmm \
         --skip_bids_validator
+```
+
+As a nipype interface:
+```py
+from nipype.interfaces.lesionclusters import LesionClusters
+clusters = LesionClusters()
+clusters.inputs.prob_map = "prob_map.nii.gz"
+clusters.inputs.bin_map = "bin_map.nii.gz"
+clusters.inputs.centers = "centers.nii.gz"
+clusters.inputs.nnmap = "nnmap.nii.gz"
+clusters.inputs.clusmap = "clusmap.nii.gz"
+clusters.inputs.gmmmap = "gmmmap.nii.gz"
+clusters.inputs.gmm = True
+clusters.inputs.parallel = True
+clusters.inputs.cores = 4
+clusters.inputs.smooth = 1.2
+clusters.inputs.min_center_size = 10
+clusters.run()
 ```
