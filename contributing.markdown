@@ -59,6 +59,11 @@ bundle install
 
 This will look for a Gemfile and install the necessary dependencies. Once that's done you can test the website! Run `bash run.sh` and on a browser go to `http://127.0.0.1:4000/`. Voilà your own local copy of the PennSIVE wiki!
 
+## 3. Create a branch
+
+```sh
+git checkout -b vgonzenb
+```
 ## 4. Work on your contribution article
 
 Now we're ready to make some changes. Open your favorite text editor and create an empty file with `.markdown` as extension. Give it a descriptive name!
@@ -77,6 +82,9 @@ Write your article with the usual markdown syntax. You may look at the other `.m
 
 Note: If run `bash run.sh` and add changes while that process is running, you may see those changes by refreshing your browser.
 
-# 5. Push to your
+## 5. Push to your changes to your copy
 
-Once you're happy with your progress you may push to your own repository
+Once you're happy with your progress you may push to your own repository:
+
+```sh
+git push origin
