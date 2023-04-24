@@ -29,6 +29,7 @@ website:
     - workflows.markdown
     - gpu-computing.markdown
     - rpackages.markdown
+    - cluster_intro.markdown
     - contributing.markdown
 
 format:
