@@ -1,9 +1,4 @@
----
-layout: page
-title: Lab pipelines
-permalink: /pennsive-pipelines/
-nav_order: 5
----
+
 # PennSIVE pipelines
 
 Generally we use R and develop R packages, but many of our tools have python and command-line interfaces as well.

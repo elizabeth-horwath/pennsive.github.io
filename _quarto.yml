@@ -1,0 +1,41 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "PennSIVE Wiki"
+  navbar:
+    background: primary
+    logo: 'logo.png'
+    search: true
+    left:
+      - text: "Welcome"
+        file: index.qmd
+    tools:
+      - icon: github
+        menu:
+          - text: Source Code
+            url:  https://github.com/pennsive/pennsive.github.io
+          - text: Report a Bug
+            url:  https://github.com/PennSIVE/pennsive.github.io/issues/new
+  sidebar:
+   style: "docked"
+   contents:
+    - environments.markdown
+    - projects.markdown
+    - heudiconv.markdown
+    - flywheel.markdown
+    - pipelines.markdown
+    - reproducibility.markdown
+    - workflows.markdown
+    - gpu-computing.markdown
+    - rpackages.markdown
+    - cluster_intro.markdown
+    - contributing.markdown
+
+format:
+  html:
+    theme: spacelab
+    css: styles.css
+    toc: true
+    

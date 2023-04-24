@@ -1,9 +1,3 @@
----
-layout: page
-title: takim Cluster Introduction
-permalink: /takim_cluster_intro/
-nav_order: 10
----
 # Cluster Computing
 *Cluster computing* used here refers to the use of remote resources for a computation.  This contrasts with *local computing*, the use of a resource such as a personal or laptop/desktop for a computation.  An example could be running a script in a programming language (R, Python, etc.); this could be down with either computing type.  What benefits are there in using these remote resources?  Doing so can provide the following advantages over local computing:
 

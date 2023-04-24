@@ -1,10 +1,7 @@
----
-layout: page
-title: Environment setup
-permalink: /environment-setup/
-nav_order: 2
----
-# Setting up your environment
+# Environment setup
+
+## Setting up your environment
+
 Neuroimaging software can be difficult to install and have complex dependencies. If any tool has a different version or is configured differently, results can become impossible to reproduce. So we use containers which are like lightweight VMs that turn your environment into code so it can be shared, version controlled, and reproduced on any machine that supports a container runtime. On platforms where you have root access (like your computer), docker is the most convenient container runtime, but Singularity is a good alternative for rootless containers in cluster environments. 
 
 There are some general purpose container images you can pull to do experimenting, but new projects with public results should create a project-specific container by writing a Dockerfile. NeuroDocker automates much of this process,

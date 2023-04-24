@@ -1,10 +1,6 @@
----
-layout: page
-title: Reproducibility
-permalink: /reproducibility/
-nav_order: 6
----
+
 # Reproducibility
+
 Random numbers are useful for many things in statistics but computers are deterministic machines so random number generators (RNGs) can only generate numbers that "look" random, i.e. have an even distribution. Each time a RNG is invoked it deterministically extracts a number from its initial state (i.e. seed) then deterministically updates its state so that it will be different on the next call. Therefore setting a seed is not thread-safe; without external memory synchronization, it's plausible two threads could generate the same or different random numbers depending on if one thread sees the update to the internal RNG state made by the other thread. Sometimes the multi-threading speedup outweighs the risks of race conditions, but when reproducibility is important you should use a single thread. Most neuroimaging tools (including ANTS, FSL, Freesurfer) can be configured to use 1 thread by setting the following environment variables:
 ```sh
 export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=1
