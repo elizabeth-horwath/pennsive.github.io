@@ -28,11 +28,12 @@ website:
     - pipelines.markdown
     - reproducibility.markdown
     - workflows.markdown
+    - cluster_intro.markdown
     - gpu-computing.markdown
     - rpackages.markdown
     - cluster_intro.markdown
     - python.md
-    - contributing.markdown
+    - contributing.qmd
 
 format:
   html:
