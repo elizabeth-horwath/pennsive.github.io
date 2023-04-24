@@ -31,6 +31,7 @@ website:
     - gpu-computing.markdown
     - rpackages.markdown
     - cluster_intro.markdown
+    - python.md
     - contributing.markdown
 
 format:

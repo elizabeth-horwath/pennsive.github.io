@@ -1,12 +1,5 @@
 [
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Welcome to the Penn Statistics in Imaging and Visualization Endeavor (PennSIVE) Center",
-    "section": "",
-    "text": "Welcome to the Penn Statistics in Imaging and Visualization Endeavor (PennSIVE) Center\nThis is the internal website for PennSIVE tutorials and best practices.\nIf you just got cluster access, first setup your SSH keys:\nssh-keygen # if you've never done this or aren't sure; you can accept all the defaults, and don't need a passphrase\nssh-copy-id user@cluster\nThen download VS code, docker, and read through the environment setup guide.\nWhen setting up a project meant for publication, read through the project setup guide which explains how to version control code with git, track data provenance with datalad, and keep data organized according to the BIDS standard.\nFor more specific python neuroimaging tutorials, see the many nipype examples. For more specific R neuroimaging tutorials, see neuroconductor.\nThe CBICA wiki (UPHS VPN required) is a good resource for CUBIC-specific tutorials, and Ali’s blog offers lots of useful PMACS-specific information.\nAlso see the PennLINC internal website which offers many useful tutorials and tips."
-  },
-  {
     "objectID": "rpackages.html",
     "href": "rpackages.html",
     "title": "R Packages",
@@ -105,6 +98,97 @@
     "text": "Array Jobs\nThe last type of job that we cover is an array job. This allows you to submit a sequence of batch jobs simulatenously, which are similar but change in one or more arguments/indices. These jobs are sent to the scheduler at once after submitting one array job, handled like a set of batch jobs of the same size. For example, suppose you have a image processing pipeline to wish to run on an image from 10 subjects. You want to run the same pipeline on each subject, so the code to run on each subject is going to be the same except for reading and writing data based on the subject ID. Instead of writing 10 scripts or writing one script and then submitting 10 separate jobs where we manually specify the subject, can automate it with an array job.\nThe process is the same as with a batch job, in that we will a bsub call, an sh file containing instructions, and then probably some programming language script such as R. The difference is we now have to specify the indices of the array which constitute the array job in the bsub call and sh file. Suppose we want to run our batch job example (linear regression model), but run it on five different sets of data (data_1.csv, …, data_5.csv) where each dataset has outcome y and covariates x1 to x3 (the data sets are simulated from a corresponding linear regression model for illustration). For the bsub call, instead of\ncd /home/kmdono02/cluster_examples/batch/batch_scripts\nbsub &lt; batch.sh\nwe would need to call\ncd /home/kmdono02/cluster_examples/batch/batch_scripts\nbsub &lt; -J \"[1-5]\" batch.sh\nin our cluster terminal. The use of -J \"[1-5]\" tells the scheduler to create an array job with indices 1 to 5. We can use other types of indices, such as -J \"[2,4]\" which will create an array job with only indices 2 and 4. The way these indices relate to what instructions are completed in your sh is that for each job in the array, the corresponding index becomes a Unix environment variable which you can reference inside of your job. This variable has the name LSB_JOBINDEX, which can you use in your R and Python scripts. However, you will also want to have some way to view logs related to each array job to view any errors or output from the cluster which is specific to that job in the array. Recall before we added in #BSUB -e /home/kmdono02/cluster_examples/batch/logs/run_model.err for example to print out an error log for the submitted job. However, this was suboptimal since there is no job ID attached to it. We knew before what it was related to, since we were only running one sh file with the name run_model. Now that we have an array job which contains multiple jobs (5 for example), we need error logs for each one with a name to reference. Luckily this is very easy, and we have two options. First, recall each batch job receives a numeric ID once it has been submitted by the scheduler. This also becomes an environmental variable which we can access, labeled LSB_JOBID. We can also use the variable %J in our sh file and/or bsub commands to refer to the job ID before run. For example, we can replace the previous #BSUB line in our batch.sh file with #BSUB -e /home/kmdono02/cluster_examples/batch/logs/run_model_%J.err to paste in the ID of the given batch job into the file name of that job’s error log and have it be written to our log directory to view. How does this relate to array jobs? Recall an array job is just a sequence of submitted batch job. Thus, each job in our array also gets a job ID to reference, which is contained in LSB_JOBID and %J. However, these IDs are long and not interpretable, what if we just want to refer to the index within our specific array job (job 1, job 2, etc.)? We just use LSB_JOBINDEX and %l respectively instead. We also add in %J or %l to the other #BSUB lines in our sh file, as well as our exec R CMD BATCH call when we specify the Rout filepath.\nLet’s do the regression example with indices 1 through 5. We’ll specify a new sh file, call it batch_array.sh. This sh file will be\n#BSUB -o /home/kmdono02/cluster_examples/batch/logs/run_model_array_%l.out\n#BSUB -e /home/kmdono02/cluster_examples/batch/logs/run_model_array_%l.err\n\ncd /home/kmdono02/cluster_examples/batch/batch_scripts\nexec R CMD BATCH --no-save --no-restore ../r_scripts/run_model_array.R  ../output/run_model_array_$LSB_JOBINDEX.out\nwhere run_model_array.R will be our R script to run the array regression model example. We’ll simulate data within each array job to reflect one of the 5 datasets which we will run the model on, and control them by setting the seed. Thus, run_model_array.R is the following:\nlibrary(tidyverse)\n\n# Suspend running commands to pause script to see it in scheduler (since it runs very fast!)\nSys.sleep(30)\n\n# Generate dataset\nn &lt;- 100\ni &lt;- as.numeric(Sys.getenv('LSB_JOBINDEX'))\nset.seed(i)\nx1 &lt;- rnorm(n); x2 &lt;- rnorm(n); x3 &lt;- rnorm(n); errors &lt;- rnorm(n, mean = 0, sd = 0.25)\ny &lt;- 2*x1+3*x2+4*x3+errors\nsimdata &lt;- data.frame(x1, x2, x3, y)\n\n# Run model\nmodel &lt;- lm(y ~ x1 + x2 + x3, data = simdata)\n\n# Store output as txt file\nsink(file = paste0(\"/home/kmdono02/cluster_examples/batch/r_output/array_model_summary_\", i, \".txt\"))\nprint(summary(model))\nsink()\nWe have simulated data from a linear regression model, of sample size 100, with normally distributed errors with standard deviation 0.25 and 3 covariates of mean 0, with their regression parameters being 2, 3, and 4 respectively. We specify the seed with each dataset as the array index, using Sys.getenv('LSB_JOBINDEX'). This reads-in the environmental variable and then converts to it numeric (is character by default in R). We then fit the regression model and then print the output to our output folder with the index included for reference. We can combine this with the above sh file and below terminal commands to run our array job:\ncd /home/kmdono02/cluster_examples/batch/batch_scripts\nbsub &lt; -J \"[1-5]\" batch_array.sh\nThe queue is now the following after submitting our array jobs:\n\n\n\nViewing queue\n\n\nLet’s do so and look at the outputs. First, the output file for one of the arrays.\nSender: LSF System &lt;jszostek@silver01&gt;\nSubject: Job 19659506[1]: &lt;[1-5]&gt; in cluster &lt;PMACS-SCC&gt; Exited\n\nJob &lt;[1-5]&gt; was submitted from host &lt;takim&gt; by user &lt;kmdono02&gt; in cluster &lt;PMACS-SCC&gt; at Wed Mar 22 17:46:27 2023\nJob was executed on host(s) &lt;silver01&gt;, in queue &lt;taki_normal&gt;, as user &lt;kmdono02&gt; in cluster &lt;PMACS-SCC&gt; at Wed Mar 22 17:46:27 2023\n&lt;/home/kmdono02&gt; was used as the home directory.\n&lt;/home/kmdono02/cluster_examples/batch/batch_scripts&gt; was used as the working directory.\nStarted at Wed Mar 22 17:46:27 2023\nTerminated at Wed Mar 22 17:47:02 2023\nResults reported at Wed Mar 22 17:47:02 2023\n\nYour job looked like:\n\n------------------------------------------------------------\n# LSBATCH: User input\n#BSUB -o /home/kmdono02/cluster_examples/batch/logs/run_model_array_%I.out\n#BSUB -e /home/kmdono02/cluster_examples/batch/logs/run_model_array_%I.err\n\ncd /home/kmdono02/cluster_examples/batch/batch_scripts\nexec R CMD BATCH --no-save --no-restore ../r_scripts/run_model_array.R  ../output/run_model_array_%I.out\n------------------------------------------------------------\n\nExited with exit code 1.\nwhich is just a summary of what was submitted for the entire array job and what the exit code was, just like would happen for a batch job. Then we have 5 resource reports inside the file one for each of the arrays. The other array’s output files are the same: all resource usages for all arrays are stored in each. Then, you could just use #BSUB -o /home/kmdono02/cluster_examples/batch/logs/run_model_array.out to avoid the duplicate files. The R terminal output is stored in ../output/run_model_array_1.out for the first array’s R terminal for example. Finally, we can view the output of the model fit requested by our R script in /home/kmdono02/cluster_examples/batch/r_output/array_model_summary_1 for example, which is as expected. We have now run our first array job!"
   },
   {
+    "objectID": "python.html",
+    "href": "python.html",
+    "title": "Intro to Python",
+    "section": "",
+    "text": "In this tutorial, we’ll be covering some of the basics of how to use Python to do whatever it is you need to do, including:\n\nPython vs. R\nPackages and evironments\nCompilers\nUsing Python in R\nUsing R in Python\nDataframe manipulation\nVisualization"
+  },
+  {
+    "objectID": "python.html#what-is-a-package",
+    "href": "python.html#what-is-a-package",
+    "title": "Intro to Python",
+    "section": "What is a package?",
+    "text": "What is a package?\nIn the same way an R package contains all the functions to complete tasks, Python packages function the same way. There’s two ways of handling this: modules and packages.\nA module is a .py file containing the functions and classes you want to use that you can import into your code. For example, if you had “hello.py” containing the function:\ndef hello(n): \n  for i in range(n): \n    print('hello world') \nYou can import this function into another .py file:\nimport hello\n\nhello.hello(10)\nA package is a group of multiple modules packaged together. Most of the publicly available ones are hosted on PyPI (the Python Package Index), but there are some still in development that are hosted on GitHub. You can install packages from either, as well as develop your own!"
+  },
+  {
+    "objectID": "python.html#installing-packages",
+    "href": "python.html#installing-packages",
+    "title": "Intro to Python",
+    "section": "Installing packages",
+    "text": "Installing packages\n\nPyPI\nMost (if not all) commonly used packages are hosted on PyPI. You can directly install packages using the “pip” command. As a general overview of the syntax, you install package (on Windows) using:\npip install packagename\nFor more information on how to install specific versions of a package, uninstalling packages, and more, you can look at the PyPI documentation\n\n\nGitHub\nIf the package can’t be found on PyPI and is instead hosted on GitHub, you can still install it using pip syntax:\npip install --upgrade https://github.com/user/package"
+  },
+  {
+    "objectID": "python.html#environments-conda-pipenvs-etc.",
+    "href": "python.html#environments-conda-pipenvs-etc.",
+    "title": "Intro to Python",
+    "section": "Environments (Conda, Pipenvs, etc.)",
+    "text": "Environments (Conda, Pipenvs, etc.)\nThe idea of an environment is important for reproducible programming. An environment can be thought of as the software and packages (with specific version numbers) that you use to code a particular task. For example, using pandas 1.0.2 and numpy 1.4.2 in Python 2.8to write hello.py. This is important for reproducible programming because functions in different package can use different syntax or give slightly different results. Anyone else interested in reproducing your results needs to use the same packages as you to achieve the same results.\nMost environment managers accomplish much the same thing, but some compilers will prefer a particular method (for example, Anaconda compilers function better with conda).\n\nConda\nConda is a generalized environment and package manager that works over many different languages, including Python. Conda can be used to install packages (similar to pip) AND to generate different environments for different codes you want to run or develop. For example, if you wanted to use numpy 1.4.2 for code1.py and numpy 1.2.1 for code2.py, you can create two environments (one for each version) and run each code in its corresponding environment.\nEnvironments can also be shared with others for reproducibility by exporting the .yaml file associated with each environment.\nFor more documentation on the specifics of conda syntax, you can read the conda documentation.\n\n\nPipenv and Venv\nPip and virtual environments are also efficient methods for managing environments and packages.\nVirtualenv or venv (virtual environment) is the lightweight version of pipenv, where you can activate an environment and install packages such that version will be saved in a requirements.txt file for others to use. The only difference between the two is that venv comes with Python3, while virtualenv has to be installed separately.\nPipenv is built on top of pip that allows you to pip install specific packages into an environment, then updates a pipfile with all the packages you’re using. It essentially combines aspects of pip and virtual environments into a single system."
+  },
+  {
+    "objectID": "python.html#spyder",
+    "href": "python.html#spyder",
+    "title": "Intro to Python",
+    "section": "Spyder",
+    "text": "Spyder\nSpyder is the IDE that comes with installation of the Anaconda Navigator. For context, the Anaconda Navigator is a GUI set up as the interface for conda environments, Python, and the user. Because of this, Spyder can be run out of conda environments set up through the Anaconda Navigator or the command line.\nCoding in Spyder is most similar to coding R scripts in RStudio, where you can run code in the console and view variables as well as generated graphics. Jupyter notebooks are also integrated with Spyder to enable easy interfacing between the two."
+  },
+  {
+    "objectID": "python.html#pycharm",
+    "href": "python.html#pycharm",
+    "title": "Intro to Python",
+    "section": "PyCharm",
+    "text": "PyCharm\nPyCharm is an IDE developed by JetBrains that is similar to Spyder but with a different interface and with more advanced tools for code analysis. The most relevant big difference between PyCharm and Spyder is that the default is to use pipenvs and venvs to set up environments.\nJupyter notebooks can also be run out of and integrated into PyCharm."
+  },
+  {
+    "objectID": "python.html#jupyter-notebook",
+    "href": "python.html#jupyter-notebook",
+    "title": "Intro to Python",
+    "section": "Jupyter Notebook",
+    "text": "Jupyter Notebook\nJupyter Notebook is the most interactive of the IDEs, and is most similar to writing code in RMarkdown. Just as in RMarkdown, you can mix chunks of code with markdown text and visualize results in real-time.\nThe one tradeoff is that there is no interface for viewing variables, so debugging becomes more difficult. If you need to more thoroughly analyze the contents of your variables for any reason, it is recommended that you use PyCharm or Spyder."
+  },
+  {
+    "objectID": "python.html#reticulate",
+    "href": "python.html#reticulate",
+    "title": "Intro to Python",
+    "section": "reticulate",
+    "text": "reticulate\nThe package “reticulate” is the most popular option for interfacing between R and Python. This interfacing includes importing and calling Python functions as well as passing data between R and Python, and comes with support for Python environments (see next section). There’s two ways of using reticulate:\n1. R Scripting To call Python functions in an R script, you can use the following syntax:\nlibrary(reticulate)\n\n# Import the \"math\" Python package\npy = import(\"math\") \n\n# Print \"math\" implementation of pi\npy$pi\nYou can use the package to essentially run Python in the middle of your R code.\n2. R Markdown\nThis package is already integrated into R Markdown such that if you click the “Add Code Chunk” button in RStudio it’ll automatically embed a Python code chunk in the middle of your RMD code that should look something like this (ignoring the comment signs of course):\n#```{python}\n#print(1)\n#```"
+  },
+  {
+    "objectID": "python.html#rpy2",
+    "href": "python.html#rpy2",
+    "title": "Intro to Python",
+    "section": "rpy2",
+    "text": "rpy2\nThe “rpy2” package for Python can be used to interface with R packages, enabling usage of CRAN and other R packages not found in Python. This can be used in both Python scripts and in Jupyter notebooks, and an example is shown below:\n# For importin R datatypes\nimport rpy2.robjects as robjects\n# For importing packages\nfrom rpy2.robjects.packages import importr \n\nbase = importr(\"base\")\nstats = importr(\"stats\")\n\nxs = robjects.FloatVector([1, 2, 3, 4, 5])\nFor more information, you can check out the rpy2 official documentation."
+  },
+  {
+    "objectID": "python.html#numpy",
+    "href": "python.html#numpy",
+    "title": "Intro to Python",
+    "section": "numpy",
+    "text": "numpy\nThe numpy package is essentially the package for numeric matrix operations in Python. You’ll find that numpy is included as a dependency in many packages for this reason, and unning matrix operations will often require converting dataframes into numpy matrices. In addition, numpy matrices must all be of the same data type, unlike pandas dataframes, and indexing is only integer-based.\nFor more information on numpy syntax, see the documentation."
+  },
+  {
+    "objectID": "python.html#pandas",
+    "href": "python.html#pandas",
+    "title": "Intro to Python",
+    "section": "pandas",
+    "text": "pandas\nThe pandas package is essentially the package for data manipulation. This package provides utilities such as reading/writing data in spreadsheets, merging/grouping dataframes, and more. The pandas DataFrame object is more or less equivalent to the data.frame object in R. Just as in a data.frame object, the pandas DataFrame can contain multiple data types and can be indexed by labels.\nIt is important to note that a pandas Series is distinct from a pandas DataFrame. A Series object will only have one column, while a DataFrame object can have one or more columns. Certain functions will only work for objects of either a Series or DataFrame type, so be aware of which one you’re working with.\nFor more information on pandas syntax, see the documentation."
+  },
+  {
+    "objectID": "python.html#seaborn",
+    "href": "python.html#seaborn",
+    "title": "Intro to Python",
+    "section": "seaborn",
+    "text": "seaborn\nThe package seaborn is a higher-level API that is faster, simpler to use, and has a better default aesthetic. However, because it is simpler there is a more limited range of available plot types and it’s harder to manipulate specific components of the plot.\nFor more information on seaborn syntax, see the documentation."
+  },
+  {
+    "objectID": "python.html#matplotlib",
+    "href": "python.html#matplotlib",
+    "title": "Intro to Python",
+    "section": "matplotlib",
+    "text": "matplotlib\nThe package matplotlib is a lower-level API that has more available plot types and enables customization of just about every element on the plot. However, because there are more options usage is not as easy as in seaborn, and getting your plot just right can take longer.\nFor more information on matplotlib syntax, see the documentation.\nAlso, fun fact: matplotlib is based on the visualization syntax for MATLAB, so if you’ve used MATLAB before the syntax is very similar!"
+  },
+  {
     "objectID": "heudiconv.html",
     "href": "heudiconv.html",
     "title": "Dicom Conversion",
@@ -152,6 +236,13 @@
     "title": "PennSIVE pipelines",
     "section": "",
     "text": "From the lesiontools package, the lesion center detection method helps count distinct lesions.\n\ngithub.com/jdwor/lesiontools\n\nAvailable as a BIDS app, on docker hub. For example:\nsingularity run --cleanenv --bind ${PWD} --bind ${TMPDIR} \\\n        /path/to/image \\\n        inputs/data \\\n        outputs \\\n        participant \\\n        --participant_label $sub_num \\\n        --strip mass \\\n        --n4 \\\n        --min-center-size 10 \\\n        --gmm \\\n        --skip_bids_validator\nAs a nipype interface:\nfrom nipype.interfaces.lesionclusters import LesionClusters\nclusters = LesionClusters()\nclusters.inputs.prob_map = \"prob_map.nii.gz\"\nclusters.inputs.bin_map = \"bin_map.nii.gz\"\nclusters.inputs.centers = \"centers.nii.gz\"\nclusters.inputs.nnmap = \"nnmap.nii.gz\"\nclusters.inputs.clusmap = \"clusmap.nii.gz\"\nclusters.inputs.gmmmap = \"gmmmap.nii.gz\"\nclusters.inputs.gmm = True\nclusters.inputs.parallel = True\nclusters.inputs.cores = 4\nclusters.inputs.smooth = 1.2\nclusters.inputs.min_center_size = 10\nclusters.run()"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Welcome to the Penn Statistics in Imaging and Visualization Endeavor (PennSIVE) Center",
+    "section": "",
+    "text": "Welcome to the Penn Statistics in Imaging and Visualization Endeavor (PennSIVE) Center\nThis is the internal website for PennSIVE tutorials and best practices.\nIf you just got cluster access, first setup your SSH keys:\nssh-keygen # if you've never done this or aren't sure; you can accept all the defaults, and don't need a passphrase\nssh-copy-id user@cluster\nThen download VS code, docker, and read through the environment setup guide.\nWhen setting up a project meant for publication, read through the project setup guide which explains how to version control code with git, track data provenance with datalad, and keep data organized according to the BIDS standard.\nFor more specific python neuroimaging tutorials, see the many nipype examples. For more specific R neuroimaging tutorials, see neuroconductor.\nThe CBICA wiki (UPHS VPN required) is a good resource for CUBIC-specific tutorials, and Ali’s blog offers lots of useful PMACS-specific information.\nAlso see the PennLINC internal website which offers many useful tutorials and tips."
   },
   {
     "objectID": "workflows.html",
