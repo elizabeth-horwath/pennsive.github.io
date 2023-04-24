@@ -1,10 +1,5 @@
----
-layout: page
-title: Nipype workflows
-permalink: /workflows/
-nav_order: 7
----
 # Nipype workflows
+
 Many neuroimaging tools have idiosyncratic CLIs that are clumsy to use from programming languages like python and R. Nipype provides a unified interface that facilitates the design of workflows within and between packages, lowering the learning curve necessary to use a new package.
 
 Nipype interfaces consist of an input and output specification class, `_run_interface` method, and `_list_outputs`. To validate inputs are the requested type and outputs get created correctly, nipype uses a package called Traits to automate much of the process. When the `.run()` method is called on an instance of your interface, the `_run_interface` method is called, and `_list_outputs` is used to list the files matched against the output specification. For example, an interface that simply moves a file might look like

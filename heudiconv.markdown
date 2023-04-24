@@ -1,10 +1,8 @@
----
-layout: page
-title: Dicom conversion
-permalink: /heudiconv/
-nav_order: 4
----
-# BIDS
+
+# Dicom Conversion
+
+## BIDS
+
 When labs organize datasets in different ways time is often wasted rewriting scripts to expect a particular structure. BIDS solves this problem by standardizing the organization of neuroimaging data. BIDS is nothing more than a prescribed directory structure and file naming convention, but it allows labs to more easily share datasets and processing pipelines, interact with the dataset programmatically via pybids, and run all the most popular neuroimaging tools ("BIDS Apps") in a consistent way.
 
 Although it's possible to manually organize NIFTIs into the BIDS structure, doing so is error-prone and inefficient. Manual organization may be the only option if dicoms aren't available, but otherwise you can use heudiconv to automatically format the produced NIFTIs according to BIDS.

@@ -1,10 +1,7 @@
----
-layout: page
-title: Project setup
-permalink: /project-setup/
-nav_order: 3
----
-# Setting up a project
+# Project setup
+
+## Setting up a project
+
 Code and data should be version controlled with git and git annex, respectively. The changes code makes to data should be recorded with datalad, a powerful wrapper for git annex. Imaging data should be organized into BIDS, and curated with CuBIDS.
 
 ## Datalad

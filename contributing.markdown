@@ -1,10 +1,4 @@
----
-layout: page
-title: Contributing to Wiki
-permalink: /contributing/
-nav_order: 9
----
-# Contributing to the PennSIVE Wiki
+# Contributing to this Wiki
 
 You'll need a Github account
 <!--Some nice into here and overview. -->

@@ -1,9 +1,4 @@
----
-layout: page
-title: GPU Computing
-permalink: /gpu-computing/
-nav_order: 10
----
+
 # GPU Computing
 
 

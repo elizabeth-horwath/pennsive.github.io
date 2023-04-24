@@ -1,10 +1,6 @@
----
-layout: page
-title: Flywheel
-permalink: /flywheel/
-nav_order: 5
----
+
 # Flywheel
+
 Some projects use data stored on Flywheel, which can be programmatically accessed through the Flywheel SDK. First, follow the directions [here](https://docs.flywheel.io/hc/en-us/articles/360008162214-Installing-the-Command-Line-Interface-CLI-) to install the Flywheel CLI, then `fw login`. Then, install the python SDK with `pip install flywheek-sdk`.
 
 Then setup a client:

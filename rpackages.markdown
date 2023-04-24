@@ -1,10 +1,6 @@
----
-layout: page
-title: R Packages
-permalink: /rpackages/
-nav_order: 11
----
-# Making R Packages
+# R Packages
+
+## Making R Packages
 
 When writing a methodological paper, it is a good idea to make your code publicly available, since it will be much easier for others to use your method on their own data. One way to do this is to create an R package.
 
