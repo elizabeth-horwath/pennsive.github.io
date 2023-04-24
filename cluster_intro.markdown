@@ -17,10 +17,10 @@ which can make your computations much more efficient, and sometimes feasible whe
 
 where your instructions for the computations are sent to a central remote computer from your local computer, *node*, which then controls how these are sent out to be completed by the other nodes.
 
-In this wiki entry, we will go over the basics of how cluster computing works with the resources available at Penn and how to interface with these resources on a fundamental level.  More efficient and powerful ways are covered in the "Advanced Cluster Practices" wiki.  Both wiki entries will discuss all of this topics in the context of the **takim** cluster on PMACS, though there are other clusters which you may have access to which operate slightly differently (e.g. CUBIC).  Examples here are down in Windows, but Mac or Linux would be very similar.
+In this wiki entry, we will go over the basics of how cluster computing works with the resources available at Penn and how to interface with these resources on a fundamental level.  More efficient and powerful ways are covered in the "Advanced Cluster Practices" wiki.  Both wiki entries will discuss all of this topics in the context of the `takim` cluster on PMACS, though there are other clusters which you may have access to which operate slightly differently (e.g. CUBIC).  Examples here are down in Windows, but Mac or Linux would be very similar.
 
 # Logging In
-First, to access the **takim** cluster you must log-in like you would for any computer.  This is done using the **Command Line/Prompt** in Windows or Mac.  To log-in to **takim**, you must first be logged into the PMACS VPN using the **Pulse Secure** app.  Once you have logged in, you can use 
+First, to access the `takim` cluster you must log-in like you would for any computer.  This is done using the **Command Line/Prompt** in Windows or Mac.  To log-in to `takim`, you must first be logged into the PMACS VPN using the **Pulse Secure** app.  Once you have logged in, you can use 
 
 `ssh pennkey@takim`
 
@@ -71,7 +71,7 @@ There are also commands for creating folders, removing files and folders, copyin
 
 ![Command Line Example](images/cluster_intro/cmd_line_example.png)
 
-which states that by default I am in my `home` directory on **takim**.  A main task you will use the command line for is submitting computations to be done by the cluster computers, which we now discuss.
+which states that by default I am in my `home` directory on `takim`.  A main task you will use the command line for is submitting computations to be done by the cluster computers, which we now discuss.
 
 # Submitting Jobs
 **Job** refers to a set of computations which you send to the cluster computer to carry out.  There a variety of options you have when organizing these instructions in terms of how these computations are distributed amongst the different nodes on the cluster, how output and status reports on these computations are saved, etc.  We discuss three types of jobs which are most useful: 1) **batch jobs**, 2) **array jobs**, 3) **interactive jobs**.  Batch jobs run a single set of computations in sequence: i.e., only one node is given all of the computations to complete.  Array jobs all you to **parrallel** the computations across multiple nodes automatically through the job submission process, allowing for multiple computations to be down by multiple nodes at once.  This can be very powerful in efficiently completing a large amount of computations which otherwise not be feasible.  An interactive job all you to submit computations on-the-fly like you do when programming on your local computer.  This contrasts with batch and array jobs which are not interactive: you send out a set of instructions, central node schedules these instructions to be completed and the entire set is attempted at once.
@@ -91,7 +91,7 @@ This will open up a session of R on an available cluster node, which we can oper
 
 Working in an interactive R session is identical to running R througn your command line on your local computer or using the R terminal panel in RStudio.  To use a GUI-based interface with R interactive R job, see the second set of cluster wikis which discusses Visual Studio Code.
 
-Now that we have our R session running, we are going to have to deal with 1) working directories and 2) **R packages**.  The default working directory is always your `home` directory, which you can change using `setwd` in your R session per-usual.  This will let you access files and paths in your R session on the cluster in reference to the working directory with relative path names (or can use absolute path names).  R packages are more complicated.  By default, a set of R packages has been installed to a central directory on **takim** which everyone has read access to (can load the packages) but not write access to (cannot install packages).  We can use `.libPaths()` to view this folder's name and `installed. packages()` to view which packages these are.  It's a lot of packages, so don't submit this command only!  We look at the first 10 packages by name:
+Now that we have our R session running, we are going to have to deal with 1) working directories and 2) **R packages**.  The default working directory is always your `home` directory, which you can change using `setwd` in your R session per-usual.  This will let you access files and paths in your R session on the cluster in reference to the working directory with relative path names (or can use absolute path names).  R packages are more complicated.  By default, a set of R packages has been installed to a central directory on `takim` which everyone has read access to (can load the packages) but not write access to (cannot install packages).  We can use `.libPaths()` to view this folder's name and `installed. packages()` to view which packages these are.  It's a lot of packages, so don't submit this command only!  We look at the first 10 packages by name:
 
 ![Module List Command](images/cluster_intro/libpaths.png)
 
@@ -116,7 +116,7 @@ The `sh` file tells the cluster node two things.  First, set the working directo
 Now that the instructions for our job are all ready, the next step is to actually submit the job to the cluster to be completed.  In our `sh` file-based setup, that means to submit the `sh` file to the cluster to be completed.  For any job, the process is the following:
 
 1. Submit job to central node.  Job is given a number as an ID in the system, with system specifications provided for the job (max memory, number of CPUs, etc.)
-2. Job is placed in **scheduler**, controlled by the central node.  On **takim**, the scheduler is called **LSF** (though others exist such as **SLURM**)
+2. Job is placed in **scheduler**, controlled by the central node.  On `takim`, the scheduler is called **LSF** (though others exist such as **SLURM**)
 3. Scheduler handles queue of jobs from all users on cluster, depending on order of submission decides which to start
 4. Your job is next on the queue, central node submits to node to run job
 
@@ -382,5 +382,5 @@ which is just a summary of what was submitted for the entire array job and what 
 To complete our introduction to cluster computing, we will cover one last scheduling command: `bkill`.  This is how you tell the scheduler to cancel either a pending job that you submitted and am waiting in the queue to complete, or a currently running job.  This is essentially to do when you are not longer interested in running a job to completion, as it clears up the queue for others to have their jobs run.  To call a specific job, just call `bkill -b x` in your terminal where `x` is the job ID you wish to cancel.  This ID can always be viewed in the `bjobs` output, as well as your `.out` file from the `bsub` submission.  If you want to cancel all jobs under your cluster user name, just use `bkill -u username` where `username` is your user name.
 
 # Conclusion
-We 
+In this wiki, went over the basic of running jobs on the `takim` cluster, particularly R and Python scripts.  We covered to how to interact with the cluster using the terminal, handle file management using WinSCP and Fetch, as well as discussed a variety of job types and how to run them.  In the next wiki, we will discuss some more advanced cluster techniques, generally centered around using **Visual Studio Code** to do all of your cluster work in one application. 
 
