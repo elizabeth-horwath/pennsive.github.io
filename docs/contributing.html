@@ -203,6 +203,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./cluster_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cluster Computing</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./gpu-computing.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">GPU Computing</span></a>
   </div>
@@ -211,12 +217,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="./rpackages.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">R Packages</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./cluster_intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Cluster Computing</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -244,10 +244,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#contributing-to-this-wiki" id="toc-contributing-to-this-wiki" class="nav-link active" data-scroll-target="#contributing-to-this-wiki">Contributing to this Wiki</a>
   <ul class="collapse">
   <li><a href="#fork-and-clone-the-wiki-repo" id="toc-fork-and-clone-the-wiki-repo" class="nav-link" data-scroll-target="#fork-and-clone-the-wiki-repo">1. Fork and clone the wiki repo</a></li>
-  <li><a href="#install-ruby-dependencies" id="toc-install-ruby-dependencies" class="nav-link" data-scroll-target="#install-ruby-dependencies">2. Install Ruby dependencies</a></li>
-  <li><a href="#create-a-branch" id="toc-create-a-branch" class="nav-link" data-scroll-target="#create-a-branch">3. Create a branch</a></li>
+  <li><a href="#link-your-local-copy-to-the-upstream-repository" id="toc-link-your-local-copy-to-the-upstream-repository" class="nav-link" data-scroll-target="#link-your-local-copy-to-the-upstream-repository">2. Link your local copy to the <code>upstream</code> repository</a></li>
+  <li><a href="#create-your-own-branch" id="toc-create-your-own-branch" class="nav-link" data-scroll-target="#create-your-own-branch">3. Create your own branch</a></li>
   <li><a href="#work-on-your-contribution-article" id="toc-work-on-your-contribution-article" class="nav-link" data-scroll-target="#work-on-your-contribution-article">4. Work on your contribution article</a></li>
-  <li><a href="#push-to-your-changes-to-your-copy" id="toc-push-to-your-changes-to-your-copy" class="nav-link" data-scroll-target="#push-to-your-changes-to-your-copy">5. Push to your changes to your copy</a></li>
+  <li><a href="#integrate-your-work-with-the-pennsive-wiki" id="toc-integrate-your-work-with-the-pennsive-wiki" class="nav-link" data-scroll-target="#integrate-your-work-with-the-pennsive-wiki">5. Integrate your work with the PennSIVE wiki</a>
+  <ul class="collapse">
+  <li><a href="#commit-your-work-on-your-branch" id="toc-commit-your-work-on-your-branch" class="nav-link" data-scroll-target="#commit-your-work-on-your-branch">Commit your work on your branch</a></li>
+  <li><a href="#updating-main-if-needed" id="toc-updating-main-if-needed" class="nav-link" data-scroll-target="#updating-main-if-needed">Updating main (if needed)</a></li>
+  <li><a href="#submitting-a-pull-request" id="toc-submitting-a-pull-request" class="nav-link" data-scroll-target="#submitting-a-pull-request">Submitting a Pull Request</a></li>
+  </ul></li>
+  <li><a href="#congratulations" id="toc-congratulations" class="nav-link" data-scroll-target="#congratulations">Congratulations</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -259,50 +265,121 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="contributing-to-this-wiki" class="level1">
 <h1>Contributing to this Wiki</h1>
-<p>You’ll need a Github account <!--Some nice into here and overview. --></p>
+<p>Thank you for considering making a contribution to the PennSIVE wiki! In this article, you will find a streamlined set of steps that you will need to follow in order to contribute your own article to the PennSIVE wiki website.<br>
+The requirements to follow this tutorial are:</p>
+<ul>
+<li>A <a href="https://github.com/join">GitHub account</a>.<br>
+</li>
+<li>Have <a href="https://quarto.org/docs/get-started/">Quarto</a> installed (comes with the latest version of Rstudio).</li>
+<li>Have <a href="https://git-scm.com/book/en/v2/Getting-Started-Installing-Git">Git</a> installed.<br>
+</li>
+<li>Basic <a href="https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax">markdown syntax</a> knowledge.</li>
+</ul>
+<p>In essence, making a contribution to this Wiki will involve writing or editing Markdown files and running a few git commands to integrate your changes with the existing wiki. Don’t worry you got this!</p>
 <section id="fork-and-clone-the-wiki-repo" class="level2">
 <h2 class="anchored" data-anchor-id="fork-and-clone-the-wiki-repo">1. Fork and clone the wiki repo</h2>
-<p>The first step to collaborate on a project is to fork the original project on Github. Navigate to <code>https://github.com/pennsive/pennsive.github.io</code> while logged in to GitHub and click <code>Fork</code> on the upper right hand corner. Then, clone your copy of the repository from GitHub onto your local machine. To do so, run the linew below (editing <your-username> on a Terminal inside a directory of your choice, which will create a directory called <code>pennsive.github.io</code> with all the code needed to run the website.</your-username></p>
+<p>The first step to collaborate on any project that is hosted on GitHub (e.g., this wiki) involves “forking”. Forking a GitHub repository (or repo for short) allows you to create your own personal copy of a project under your GitHub account. This forking mechanism allows you to back up changes you make to this wiki’s code without affecting the original repository.</p>
+<p>To fork this wiki’s source code, follow these steps:<br>
+1. Navigate to <code>https://github.com/pennsive/pennsive.github.io</code> while logged in to GitHub.<br>
+2. Click <code>Fork</code> on the upper right hand corner. <img src="images/contributing/forking.png" class="img-fluid" alt="How to Fork"></p>
+<p>After forking, you can check your personal copy of the wiki’s source code under this URL: <code>https://github.com/&lt;your-username&gt;/pennsive.github.io</code>.<br>
+3. Then, clone your copy of the repository from GitHub onto your local machine. In a <a href="https://support.apple.com/guide/terminal/open-or-quit-terminal-apd5265185d-f365-44cb-8b09-71a064a42125/mac">Terminal</a>, run:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/<span class="op">&lt;</span>your-username<span class="op">&gt;</span>/pennsive.github.io</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Then, we’ll need to configure the original repository as the <code>upstream</code> repository</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> pennsive.github.io</span>
+<p>This will create a folder called <code>pennsive.github.io</code> at the location where you run this command.</p>
+</section>
+<section id="link-your-local-copy-to-the-upstream-repository" class="level2">
+<h2 class="anchored" data-anchor-id="link-your-local-copy-to-the-upstream-repository">2. Link your local copy to the <code>upstream</code> repository</h2>
+<p>GitHub allows you to have remote copies of your git repositories. By convention, your personal <strong>remote</strong> copy of a git repository is called <code>origin</code>. For projects you do not own (e.g., forked projects), there is one more remote copy that you should track: the original repository, which by convention is called <code>upstream</code>.<br>
+To track the original PennSIVE wiki repository as the <code>upstream</code> repository, you can run:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> pennsive.github.io <span class="co"># to get into the project folder</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote add upstream https://github.com/pennsive/pennsive.github.io.git</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>We’ll get into details of why this is needed in section 4</p>
-<!--Bit about origin -->
+<p>Tracking the <code>upstream</code> repo will allow you to incorporate incoming changes while you work on your contribution article. Find more details on how this is done in this article [TODO: link to section in git article]</p>
 </section>
-<section id="install-ruby-dependencies" class="level2">
-<h2 class="anchored" data-anchor-id="install-ruby-dependencies">2. Install Ruby dependencies</h2>
-<p>Check Home brew installation or Install Homebrew. First run</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> <span class="at">--version</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>If that does not work then you need to install homebrew</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">/bin/bash</span> <span class="at">-c</span> <span class="st">"</span><span class="va">$(</span><span class="ex">curl</span> <span class="at">-fsSL</span> https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh<span class="va">)</span><span class="st">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Then, install Ruby and the Bundler gem.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install ruby</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">gem</span> install bundler <span class="at">--user-install</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Now, make sure you’re inside <code>pennsive.github.io</code> and run</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">bundle</span> install </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>This will look for a Gemfile and install the necessary dependencies. Once that’s done you can test the website! Run <code>bash run.sh</code> and on a browser go to <code>http://127.0.0.1:4000/</code>. Voilà your own local copy of the PennSIVE wiki!</p>
-</section>
-<section id="create-a-branch" class="level2">
-<h2 class="anchored" data-anchor-id="create-a-branch">3. Create a branch</h2>
-<div class="sourceCode" id="cb7"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout <span class="at">-b</span> vgonzenb</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="create-your-own-branch" class="level2">
+<h2 class="anchored" data-anchor-id="create-your-own-branch">3. Create your own branch</h2>
+<p>To keep your work organized, you will use a branch. A branch is essentially an alternative version of your repository. For more details check the git article [TODO: add link].</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout <span class="at">-b</span> <span class="op">&lt;</span>yourusername<span class="op">&gt;</span> # if you<span class="st">'re making multiple contributions, work on each in a separate branch and give each one a specific name</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Technically, you <em>could</em> work on the <code>main</code> branch instead of creating another branch for your work. However, branches allow you to incorporate changes easily in the event the <code>main</code> branch of the <code>upstream</code> changes (see rebasing [TODO: add link]). And you <strong>will</strong> need to be in sync with <code>upstream</code> when contributing your own work. So be safe: use branches.</p>
 </section>
 <section id="work-on-your-contribution-article" class="level2">
 <h2 class="anchored" data-anchor-id="work-on-your-contribution-article">4. Work on your contribution article</h2>
-<p>Now we’re ready to make some changes. Open your favorite text editor and create an empty file with <code>.markdown</code> as extension. Give it a descriptive name! Then add a YAML section to the top, which will tell Jekyll how to render the page. For instance, you may edit the YAML of this page</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">---</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ex">layout:</span> page</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="ex">title:</span> Contributing to Wiki</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="ex">permalink:</span> /contributing/</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="ex">nav_order:</span> 9</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="ex">---</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Write your article with the usual markdown syntax. You may look at the other <code>.markdown</code> files for examples.</p>
-<p>Note: If run <code>bash run.sh</code> and add changes while that process is running, you may see those changes by refreshing your browser.</p>
+<p>Once you are in your own branch——check that the terminal shows your branch name within parentheses——you’re ready to make changes.</p>
+<p>In Rstudio, create a Quarto Document (i.e.&nbsp;a file with <code>.qmd</code> extension).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/contributing/create_qmd.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Creating a Quarto Document</figcaption><p></p>
+</figure>
+</div>
+<p>The first line of your document should be a top-level header with ‘#’. This header will be the title of your article, which shows up in the navigation bar of the website. Note that you should not have a YAML section in your document as it is commonly found in Rmarkdown/Quarto documents. For illustration purposes, suppose your document is named <code>article.qmd</code> with a header <code># Doing cool stuff</code>. Then your newly created document would look like this:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Doing cool stuff</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>To add the article to the navigation bar, edit the file <code>_quarto.yml</code> by adding the line <code>- article.qmd</code> under the <code>contents</code> section of the <code>sidebar</code> section. It will look something like this (<code>...</code> represents omitted content):</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ...</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">website:</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ...</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="ex">sidebar:</span> </span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ...</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="ex">contents:</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>      <span class="co"># ...</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>      <span class="ex">-</span> article.qmd</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>      <span class="co"># ...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Once you have added your article to the list of articles in <code>_quarto.yml</code> as described, you can preview the site by running <code>quarto render</code> in the command line <strong>OR</strong> by pressing the render button in Rstudio. Note: you need the latest version of Rstudio, which comes with Quarto, to use the latter method. <img src="images/contributing/cool_stuff.png" class="img-fluid" alt="Rendering"></p>
+<p>Rendering will create (or update) <code>.html</code> files found under the <code>docs/</code> directory: these files are the actual content that is viewed in a browser. After rendering, open <code>docs/index.html</code> in a browser and navigate to your article using the sidebar. Voila - A preview of your own version of the PennSIVE wiki! <img src="images/contributing/cool_stuff_rendered.png" class="img-fluid" alt="Rendered example"></p>
+<p>Once you’re familiar with the rendering process, it’s time to generate some content!<br>
+Write out your contribution article using markdown syntax, version control your work throughout if possible, and follow the next step when you’re ready to submit your work.</p>
 </section>
-<section id="push-to-your-changes-to-your-copy" class="level2">
-<h2 class="anchored" data-anchor-id="push-to-your-changes-to-your-copy">5. Push to your changes to your copy</h2>
-<p>Once you’re happy with your progress you may push to your own repository:</p>
-<p>```sh git push origin</p>
+<section id="integrate-your-work-with-the-pennsive-wiki" class="level2">
+<h2 class="anchored" data-anchor-id="integrate-your-work-with-the-pennsive-wiki">5. Integrate your work with the PennSIVE wiki</h2>
+<p>We will follow a common Git workflow to incorporate our changes to the live wiki. Before commiting your files, make sure you have rendered and previewed the results (there should be changes to the <code>docs/</code> directory if you run <code>git status</code>)</p>
+<section id="commit-your-work-on-your-branch" class="level3">
+<h3 class="anchored" data-anchor-id="commit-your-work-on-your-branch">Commit your work on your branch</h3>
+<p>First you need to make sure all your work is safe by committing it. To commit [TODO: add link] your work, first add your file to the staging area [TODO: add link].</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add article.qmd docs/article.html <span class="co"># replace 'article' by your file name</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Then, add all other files that have been updated, this will include the <code>_quarto.yml</code> file .</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add <span class="at">-u</span> <span class="co"># -u adds files that are already tracked in the repo and that have been modified</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Once all the necessary files are in the staging area, go ahead and commit. Note: make sure that you are <strong>in your own branch</strong> and <strong>NOT</strong> on the <code>main</code> branch.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">'some descriptive message'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Back up your changes to GitHub before continuing:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push origin <span class="op">&lt;</span>your-branch<span class="op">&gt;</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="updating-main-if-needed" class="level3">
+<h3 class="anchored" data-anchor-id="updating-main-if-needed">Updating main (if needed)</h3>
+<p>You will need to incorporate any changes made to the wiki that may have happened after you forked. To check if changes have been made to the wiki, you need to <code>fetch</code> the metadata from the <code>upstream</code> repository.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout main <span class="co"># you should not have uncommitted work before switching to main</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> fetch upstream main</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Once the metadata has been <code>fetch</code>ed, check if your main branch is up to date</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>If the resulting message says ‘up to date’ you can skip to (TODO: submitting a pull request). If not follow this process:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> pull upstream main</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout <span class="op">&lt;</span>your-branch<span class="op">&gt;</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> merge main</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>These three commands will (1) update your <code>main</code> branch to match what is in the original repository you once forked, (2) merge the updated changes from the <code>main</code> branch to <code>&lt;your-branch&gt;</code>. You may need to resolve merge conflicts [TODO: add link] which falls out of the scope of this. However, here’s some additional resources (TODO)</p>
+</section>
+<section id="submitting-a-pull-request" class="level3">
+<h3 class="anchored" data-anchor-id="submitting-a-pull-request">Submitting a Pull Request</h3>
+<p>After merging potential updates to the wiki as described above (or if that step was not needed), you can go ahead and push the final version of your work to GitHub.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push origin <span class="op">&lt;</span>your-branch<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Once that is successful, navigate to your GitHub account and start a <strong>Pull Request</strong>. In your copy of the repository, you will see a green button to start a pull request. As an example, here’s the pull request for the article you are currently reading.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/contributing/pr_start.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Starting a pull request</figcaption><p></p>
+</figure>
+</div>
+<p>Clicking on the <code>Compare &amp; pull request</code> will take you to a page in the PennSIVE repo where you can describe your edits. Check that the name of your branch appears on the right (see underlined) and the main branch of the PennSIVE repo on the left. Then, include a descriptive summary of your proposed changes/additions. Finally, hit ‘create pull request’.<br>
+<img src="images/contributing/pr_prepare.png" class="img-fluid" alt="Preparing a pull request">.</p>
+<p>Once you have submitted your pull request, the site maintainer will review your changes and either accept them or ask for more edits. The status of the pull request will be publicly visible on the PennSIVE repo. If more edits are required, make more commits to your branch, push them to your repo, and these changes will appear in your pull request.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/contributing/pr_submitted.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Pull Request Submitted</figcaption><p></p>
+</figure>
+</div>
+</section>
+</section>
+<section id="congratulations" class="level2">
+<h2 class="anchored" data-anchor-id="congratulations">Congratulations</h2>
+<p>You have made a contribution to the PennSIVE wiki and made the world a better place!</p>
 
 
 </section>
