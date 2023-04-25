@@ -4,7 +4,7 @@ Thank you for considering making a contribution to the PennSIVE wiki! In this ar
 The requirements to follow this tutorial are: 
 
 - A [GitHub account](https://github.com/join).  
-- Have [Quarto](https://quarto.org/docs/get-started/) installed.  
+- Have [Quarto](https://quarto.org/docs/get-started/) installed (comes with the latest version of Rstudio).
 - Have [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) installed.  
 - Basic [markdown syntax](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax) knowledge.  
 
@@ -37,17 +37,17 @@ cd pennsive.github.io # to get into the project folder
 git remote add upstream https://github.com/pennsive/pennsive.github.io.git
 ```
 
-Tracking the `upstream` repo will allow you to incorporate incoming changes while you work on your contribution article. Find more details on how this is done in section [TODO: link to section]
+Tracking the `upstream` repo will allow you to incorporate incoming changes while you work on your contribution article. Find more details on how this is done in this article [TODO: link to section in git article]
 
 ## 3. Create your own branch
 
-To keep your work organized, you will use a branch. A branch is essentially an alternative version of your repository. For more details check this article [TODO: add link]. 
+To keep your work organized, you will use a branch. A branch is essentially an alternative version of your repository. For more details check the git article [TODO: add link]. 
 
 ```sh
-git checkout -b <yourusername> ## if you're making multiple contributions, work on each in a separate branch and give each one a specific name
+git checkout -b <yourusername> # if you're making multiple contributions, work on each in a separate branch and give each one a specific name
 ```
 
-Technically, you *could* work on the `main` branch instead of creating another branch for your work. However, branches allow you to incorporate changes easily in the event the `main` branch of the `upstream` changes (see [rebasing](TODO). And you **will** need to be in sync with `upstream` when contributing your own work. So be safe: use branches.
+Technically, you *could* work on the `main` branch instead of creating another branch for your work. However, branches allow you to incorporate changes easily in the event the `main` branch of the `upstream` changes (see rebasing [TODO: add link]). And you **will** need to be in sync with `upstream` when contributing your own work. So be safe: use branches.
 
 ## 4. Work on your contribution article
 
@@ -90,7 +90,7 @@ We will follow a common Git workflow to incorporate our changes to the live wiki
 
 ### Commit your work on your branch
 
-First you need to make sure all your work is safe by committing it. To [commit](TODO) your work, first add your file to the [staging area](TODO).  
+First you need to make sure all your work is safe by committing it. To commit [TODO: add link] your work, first add your file to the staging area [TODO: add link].  
 
 ```sh
 git add article.qmd docs/article.html # replace 'article' by your file name
@@ -102,7 +102,7 @@ Then, add all other files that have been updated, this will include the `_quarto
 git add -u # -u adds files that are already tracked in the repo and that have been modified
 ```
 
-Once all the ncessary files are in the staging area, go ahead and commit. Note: make sure that you are **in your own branch** and **NOT** on the `main` branch. 
+Once all the necessary files are in the staging area, go ahead and commit. Note: make sure that you are **in your own branch** and **NOT** on the `main` branch. 
 
 ```sh
 git commit -m 'some descriptive message'
@@ -137,7 +137,7 @@ git checkout <your-branch>
 git merge main
 ```
 
-These three commands will (1) update your `main` branch to match what is in the original repository you once forked, (2) merge the updated changes from the `main` branch to `<your-branch>`. You may need to [resolve merge conflicts](TODO) which falls out of the scope of this. However, here's some additional resources (TODO)
+These three commands will (1) update your `main` branch to match what is in the original repository you once forked, (2) merge the updated changes from the `main` branch to `<your-branch>`. You may need to resolve merge conflicts [TODO: add link] which falls out of the scope of this. However, here's some additional resources (TODO)
 
 ### Submitting a Pull Request 
 
@@ -151,13 +151,16 @@ Once that is successful, navigate to your GitHub account and start a **Pull Requ
 
 ![Starting a pull request](images/contributing/pr_start.png)
 
-Clicking on the `Compare & pull request` will take you to a page in the PennSIVE repo where you can describe your edits. Check that the name of your branch appears on the right (see underlined) and the main branch of the PennSIVE repo on the left. Then, include a descriptive summary of your proposed changes/additions. Finally, hit 'create pull request'.
+Clicking on the `Compare & pull request` will take you to a page in the PennSIVE repo where you can describe your edits. Check that the name of your branch appears on the right (see underlined) and the main branch of the PennSIVE repo on the left. Then, include a descriptive summary of your proposed changes/additions. Finally, hit 'create pull request'.  
 ![Preparing a pull request](images/contributing/pr_prepare.png).   
 
 Once you have submitted your pull request, the site maintainer will review your changes and either accept them or ask for more edits. The status of the pull request will be publicly visible on the PennSIVE repo. If more edits are required, make more commits to your branch, push them to your repo, and these changes will appear in your pull request. 
 
 ![Pull Request Submitted](images/contributing/pr_submitted.png)
 
+## Congratulations
+
+You have made a contribution to the PennSIVE wiki and made the world a better place!
 
 
 
