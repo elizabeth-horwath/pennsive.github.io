@@ -343,7 +343,7 @@ Write out your contribution article using markdown syntax, version control your 
 <div class="sourceCode" id="cb6"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add article.qmd docs/article.html <span class="co"># replace 'article' by your file name</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Then, add all other files that have been updated, this will include the <code>_quarto.yml</code> file .</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add <span class="at">-u</span> <span class="co"># -u adds files that are already tracked in the repo and that have been modified</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Once your files are in the staging area, go ahead and commit. Note: make sure that you are <strong>in your own branch</strong> and <strong>NOT</strong> on the <code>main</code> branch.</p>
+<p>Once all the ncessary files are in the staging area, go ahead and commit. Note: make sure that you are <strong>in your own branch</strong> and <strong>NOT</strong> on the <code>main</code> branch.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">'some descriptive message'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Back up your changes to GitHub before continuing:</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push origin <span class="op">&lt;</span>your-branch<span class="op">&gt;</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -365,7 +365,21 @@ Write out your contribution article using markdown syntax, version control your 
 <h3 class="anchored" data-anchor-id="submitting-a-pull-request">Submitting a Pull Request</h3>
 <p>After merging potential updates to the wiki as described above (or if that step was not needed), you can go ahead and push the final version of your work to GitHub.</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push origin <span class="op">&lt;</span>your-branch<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Once that is successful, navigate to your GitHub account and</p>
+<p>Once that is successful, navigate to your GitHub account and start a <strong>Pull Request</strong>. In your copy of the repository, you will see a green button to start a pull request. As an example, here’s the pull request for the article you are currently reading.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/contributing/pr_start.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Starting a pull request</figcaption><p></p>
+</figure>
+</div>
+<p>Clicking on the <code>Compare &amp; pull request</code> will take you to a page in the PennSIVE repo where you can describe your edits. Check that the name of your branch appears on the right (see underlined) and the main branch of the PennSIVE repo on the left. Then, include a descriptive summary of your proposed changes/additions. Finally, hit ‘create pull request’. <img src="images/contributing/pr_prepare.png" class="img-fluid" alt="Preparing a pull request">.</p>
+<p>Once you have submitted your pull request, the site maintainer will review your changes and either accept them or ask for more edits. The status of the pull request will be publicly visible on the PennSIVE repo. If more edits are required, make more commits to your branch, push them to your repo, and these changes will appear in your pull request.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/contributing/pr_submitted.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Pull Request Submitted</figcaption><p></p>
+</figure>
+</div>
 
 
 </section>

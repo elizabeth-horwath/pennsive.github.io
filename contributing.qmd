@@ -147,9 +147,17 @@ After merging potential updates to the wiki as described above (or if that step 
 git push origin <your-branch>
 ```
 
-Once that is successful, navigate to your GitHub account and start a **Pull Request**
+Once that is successful, navigate to your GitHub account and start a **Pull Request**. In your copy of the repository, you will see a green button to start a pull request. As an example, here's the pull request for the article you are currently reading. 
 
-[How to start a pull request]
+![Starting a pull request](images/contributing/pr_start.png)
+
+Clicking on the `Compare & pull request` will take you to a page in the PennSIVE repo where you can describe your edits. Check that the name of your branch appears on the right (see underlined) and the main branch of the PennSIVE repo on the left. Then, include a descriptive summary of your proposed changes/additions. Finally, hit 'create pull request'.
+![Preparing a pull request](images/contributing/pr_prepare.png).   
+
+Once you have submitted your pull request, the site maintainer will review your changes and either accept them or ask for more edits. The status of the pull request will be publicly visible on the PennSIVE repo. If more edits are required, make more commits to your branch, push them to your repo, and these changes will appear in your pull request. 
+
+![Pull Request Submitted](images/contributing/pr_submitted.png)
+
 
 
 
