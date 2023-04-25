@@ -29,6 +29,8 @@ website:
     - reproducibility.markdown
     - workflows.markdown
     - cluster_intro.markdown
+    - bash_startup.qmd
+    - cluster_rstudio.qmd
     - gpu-computing.markdown
     - rpackages.markdown
     - python.md
