@@ -1,5 +1,7 @@
 
-# Using RStudio/Jupyter Lab on the Cluster
+# RStudio/Jupyter Lab on Cluster
+
+## Using RStudio/Jupyter Lab on the Cluster
 
 To use RStudio or Jupyter Lab on the cluster, first navigate to the `PennSIVE Bash Startup Scripts` tab and make sure you have those aliases and startup commands in your bash startup files. Then, make sure you have sourced those startup files (See the `Source new startup scripts` on the `PennSIVE Bash Startup Scripts` tab.)
 
@@ -40,7 +42,7 @@ To use RStudio on the cluster, follow the below steps:
 
 Note: Please do not run large jobs in browser RStudio. Anything you run here runs on the login node (takim), which is not designed to have large computing power. If you run something too big, it will crash the takim login server, and nobody else will be able to use the cluster until it is restarted by PMACS!
 
-# Using RStudio
+# Using Jupyter Lab
 
 To use Jupyter Lab on the cluster, follow the below steps:
 

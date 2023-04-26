@@ -113,7 +113,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./bash_startup.html">PennSIVE Bash Startup Scripts</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./bash_startup.html">Bash Setup</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
     </div>
@@ -176,13 +176,13 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./bash_startup.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">PennSIVE Bash Startup Scripts</span></a>
+ <span class="menu-text">Bash Setup</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cluster_rstudio.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Using RStudio/Jupyter Lab on the Cluster</span></a>
+ <span class="menu-text">RStudio/Jupyter Lab on Cluster</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -219,8 +219,9 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#pennsive-bash-startup-scripts" id="toc-pennsive-bash-startup-scripts" class="nav-link active" data-scroll-target="#pennsive-bash-startup-scripts">PennSIVE Bash Startup Scripts</a>
+  <li><a href="#bash-setup" id="toc-bash-setup" class="nav-link active" data-scroll-target="#bash-setup">Bash Setup</a>
   <ul class="collapse">
+  <li><a href="#pennsive-bash-startup-scripts" id="toc-pennsive-bash-startup-scripts" class="nav-link" data-scroll-target="#pennsive-bash-startup-scripts">PennSIVE Bash Startup Scripts</a></li>
   <li><a href="#startup-scripts" id="toc-startup-scripts" class="nav-link" data-scroll-target="#startup-scripts">Startup Scripts</a>
   <ul class="collapse">
   <li><a href="#bash_profile" id="toc-bash_profile" class="nav-link" data-scroll-target="#bash_profile">.bash_profile</a></li>
@@ -238,11 +239,14 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section id="pennsive-bash-startup-scripts" class="level1">
-<h1>PennSIVE Bash Startup Scripts</h1>
+<section id="bash-setup" class="level1">
+<h1>Bash Setup</h1>
+<section id="pennsive-bash-startup-scripts" class="level2">
+<h2 class="anchored" data-anchor-id="pennsive-bash-startup-scripts">PennSIVE Bash Startup Scripts</h2>
 <p>When you <code>ssh</code> into the cluster, bash automatically sources (AKA runs) three files from your home folder: .bash_profile, .bash_aliases, and .bashrc</p>
 <p>It is helpful/important that you include a number of commands in these files so that your environment is set up correctly, and also so you can load a number of “aliases” (ie short abbreviations for longer, commonly-used commands) into the environment.</p>
 <p>Below are PMACS-specific bash scripts that may be useful to PennSIVE members. These files should be copied into your home folder and named the headers below. To use these startup files, you will additionally need a file named <code>.env</code>, also included below.</p>
+</section>
 <section id="startup-scripts" class="level2">
 <h2 class="anchored" data-anchor-id="startup-scripts">Startup Scripts</h2>
 <section id="bash_profile" class="level3">

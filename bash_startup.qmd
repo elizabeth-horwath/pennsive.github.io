@@ -1,5 +1,7 @@
 
-# PennSIVE Bash Startup Scripts
+# Bash Setup
+
+## PennSIVE Bash Startup Scripts
 
 When you `ssh` into the cluster, bash automatically sources (AKA runs) three files from your home folder: .bash_profile, .bash_aliases, and .bashrc
 

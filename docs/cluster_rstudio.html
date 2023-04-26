@@ -113,7 +113,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cluster_rstudio.html">Using RStudio/Jupyter Lab on the Cluster</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cluster_rstudio.html">RStudio/Jupyter Lab on Cluster</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
     </div>
@@ -176,13 +176,13 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./bash_startup.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">PennSIVE Bash Startup Scripts</span></a>
+ <span class="menu-text">Bash Setup</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cluster_rstudio.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Using RStudio/Jupyter Lab on the Cluster</span></a>
+ <span class="menu-text">RStudio/Jupyter Lab on Cluster</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -219,12 +219,13 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#using-rstudiojupyter-lab-on-the-cluster" id="toc-using-rstudiojupyter-lab-on-the-cluster" class="nav-link active" data-scroll-target="#using-rstudiojupyter-lab-on-the-cluster">Using RStudio/Jupyter Lab on the Cluster</a>
+  <li><a href="#rstudiojupyter-lab-on-cluster" id="toc-rstudiojupyter-lab-on-cluster" class="nav-link active" data-scroll-target="#rstudiojupyter-lab-on-cluster">RStudio/Jupyter Lab on Cluster</a>
   <ul class="collapse">
+  <li><a href="#using-rstudiojupyter-lab-on-the-cluster" id="toc-using-rstudiojupyter-lab-on-the-cluster" class="nav-link" data-scroll-target="#using-rstudiojupyter-lab-on-the-cluster">Using RStudio/Jupyter Lab on the Cluster</a></li>
   <li><a href="#add-relevant-aliases-to-your-local-computer" id="toc-add-relevant-aliases-to-your-local-computer" class="nav-link" data-scroll-target="#add-relevant-aliases-to-your-local-computer">Add relevant aliases to your local computer</a></li>
   </ul></li>
   <li><a href="#using-rstudio" id="toc-using-rstudio" class="nav-link" data-scroll-target="#using-rstudio">Using RStudio</a></li>
-  <li><a href="#using-rstudio-1" id="toc-using-rstudio-1" class="nav-link" data-scroll-target="#using-rstudio-1">Using RStudio</a></li>
+  <li><a href="#using-jupyter-lab" id="toc-using-jupyter-lab" class="nav-link" data-scroll-target="#using-jupyter-lab">Using Jupyter Lab</a></li>
   </ul>
 </nav>
     </div>
@@ -233,9 +234,12 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section id="using-rstudiojupyter-lab-on-the-cluster" class="level1">
-<h1>Using RStudio/Jupyter Lab on the Cluster</h1>
+<section id="rstudiojupyter-lab-on-cluster" class="level1">
+<h1>RStudio/Jupyter Lab on Cluster</h1>
+<section id="using-rstudiojupyter-lab-on-the-cluster" class="level2">
+<h2 class="anchored" data-anchor-id="using-rstudiojupyter-lab-on-the-cluster">Using RStudio/Jupyter Lab on the Cluster</h2>
 <p>To use RStudio or Jupyter Lab on the cluster, first navigate to the <code>PennSIVE Bash Startup Scripts</code> tab and make sure you have those aliases and startup commands in your bash startup files. Then, make sure you have sourced those startup files (See the <code>Source new startup scripts</code> on the <code>PennSIVE Bash Startup Scripts</code> tab.)</p>
+</section>
 <section id="add-relevant-aliases-to-your-local-computer" class="level2">
 <h2 class="anchored" data-anchor-id="add-relevant-aliases-to-your-local-computer">Add relevant aliases to your local computer</h2>
 <p>To make it easier to use RStudio/Jupyter Lab on the cluster, add the following aliases to your local bash. One easy way to do this is to edit the first four lines of the following code block (See the <code>.env</code> header on the <code>PennSIVE Bash Startup Scripts</code> tab) and then copy-paste the following code block at the bottom of the <code>.bash_profile</code> file on your personal computer. Make sure the PREFERRED_PORT you use here is identical to the one you used on the cluster.</p>
@@ -275,8 +279,8 @@ alias takimhttp2="ssh -L ${PREFERRED_PORT2}:127.0.0.1:${PREFERRED_PORT2} -q ${PM
 </ol>
 <p>Note: Please do not run large jobs in browser RStudio. Anything you run here runs on the login node (takim), which is not designed to have large computing power. If you run something too big, it will crash the takim login server, and nobody else will be able to use the cluster until it is restarted by PMACS!</p>
 </section>
-<section id="using-rstudio-1" class="level1">
-<h1>Using RStudio</h1>
+<section id="using-jupyter-lab" class="level1">
+<h1>Using Jupyter Lab</h1>
 <p>To use Jupyter Lab on the cluster, follow the below steps:</p>
 <ol type="1">
 <li>Connect to PMACS VPN</li>
