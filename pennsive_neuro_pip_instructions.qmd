@@ -4,6 +4,8 @@ There are multiple pipelines available through the [PennSIVE_neuro_pip repo](htt
 
 For each pipeline, usage instructions will be provided with dummy paths and an example path. Clicking the pipeline name will take you to the respective pipeline's GitHub page.
 
+Note: some of these pipelines are also available as BIDS apps, with instructions on the [PennSIVE pipelines](https://pennsive.github.io/pipelines.html) page of this wiki.
+
 ## [BIDS](https://github.com/PennSIVE/PennSIVE_neuro_pip/tree/main/pipelines/bids)
 
 The BIDS pipeline converts DICOM images to NIfTI and organizes the files in BIDS format. It uses the heudiconv DICOM converter and an RShiny app for heuristic customization.
