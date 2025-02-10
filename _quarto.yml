@@ -34,6 +34,7 @@ website:
     - gpu-computing.markdown
     - rpackages.markdown
     - python.md
+    - pennsive_neuro_pip_instructions.qmd
     - contributing.qmd
 
 format:
