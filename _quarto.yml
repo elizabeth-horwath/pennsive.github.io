@@ -35,6 +35,7 @@ website:
     - rpackages.markdown
     - python.md
     - pennsive_neuro_pip_instructions.qmd
+    - containers.qmd
     - contributing.qmd
 
 format:

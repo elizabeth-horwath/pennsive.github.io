@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>rpackages – PennSIVE Wiki</title>
+<title>Containers – PennSIVE Wiki</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -122,7 +157,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./rpackages.html">R Packages</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./containers.html">Containers</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -202,7 +237,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./rpackages.html" class="sidebar-item-text sidebar-link active">
+  <a href="./rpackages.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">R Packages</span></a>
   </div>
 </li>
@@ -216,6 +251,12 @@ ul.task-list li input[type="checkbox"] {
   <div class="sidebar-item-container"> 
   <a href="./pennsive_neuro_pip_instructions.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">PennSIVE_neuro_pip</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./containers.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Containers</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -234,310 +275,104 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#r-packages" id="toc-r-packages" class="nav-link active" data-scroll-target="#r-packages">R Packages</a>
+  <li><a href="#containers" id="toc-containers" class="nav-link active" data-scroll-target="#containers">Containers</a>
   <ul class="collapse">
-  <li><a href="#making-r-packages" id="toc-making-r-packages" class="nav-link" data-scroll-target="#making-r-packages">Making R Packages</a></li>
-  <li><a href="#tldr-you-can-make-an-r-package-with-3-lines-of-code" id="toc-tldr-you-can-make-an-r-package-with-3-lines-of-code" class="nav-link" data-scroll-target="#tldr-you-can-make-an-r-package-with-3-lines-of-code">TLDR; You Can Make an R Package with 3 Lines of Code</a></li>
-  <li><a href="#example-pennsive_stuff" id="toc-example-pennsive_stuff" class="nav-link" data-scroll-target="#example-pennsive_stuff">Example: <code>pennsive_stuff</code></a>
+  <li><a href="#pennsive-neuro-containers" id="toc-pennsive-neuro-containers" class="nav-link" data-scroll-target="#pennsive-neuro-containers">PennSIVE / neuro Containers</a></li>
+  <li><a href="#using-the-docker-container-on-your-mac" id="toc-using-the-docker-container-on-your-mac" class="nav-link" data-scroll-target="#using-the-docker-container-on-your-mac">Using the Docker Container on your Mac</a></li>
+  <li><a href="#using-the-docker-container-on-the-cluster" id="toc-using-the-docker-container-on-the-cluster" class="nav-link" data-scroll-target="#using-the-docker-container-on-the-cluster">Using the Docker Container on the Cluster</a>
   <ul class="collapse">
-  <li><a href="#install-r-packages-to-help-you-make-packages" id="toc-install-r-packages-to-help-you-make-packages" class="nav-link" data-scroll-target="#install-r-packages-to-help-you-make-packages">1. Install R packages to help you make packages</a></li>
-  <li><a href="#a.-optional-check-that-your-package-name-is-valid" id="toc-a.-optional-check-that-your-package-name-is-valid" class="nav-link" data-scroll-target="#a.-optional-check-that-your-package-name-is-valid">1a. (Optional) Check that your package name is valid</a></li>
-  <li><a href="#create-package-directory" id="toc-create-package-directory" class="nav-link" data-scroll-target="#create-package-directory">2. Create Package Directory</a></li>
-  <li><a href="#add-functions-to-the-r-folder" id="toc-add-functions-to-the-r-folder" class="nav-link" data-scroll-target="#add-functions-to-the-r-folder">3. Add Functions to the R Folder</a></li>
-  <li><a href="#write-documentation-for-functions" id="toc-write-documentation-for-functions" class="nav-link" data-scroll-target="#write-documentation-for-functions">4. Write Documentation for Functions</a></li>
-  <li><a href="#install-package" id="toc-install-package" class="nav-link" data-scroll-target="#install-package">5. Install Package</a></li>
+  <li><a href="#using-the-docker-container-on-the-cluster-in-interactive-mode" id="toc-using-the-docker-container-on-the-cluster-in-interactive-mode" class="nav-link" data-scroll-target="#using-the-docker-container-on-the-cluster-in-interactive-mode">Using the Docker Container on the Cluster in Interactive Mode</a></li>
+  <li><a href="#using-the-gpu-docker-container-on-the-cluster" id="toc-using-the-gpu-docker-container-on-the-cluster" class="nav-link" data-scroll-target="#using-the-gpu-docker-container-on-the-cluster">Using the GPU Docker Container on the Cluster</a></li>
+  <li><a href="#batch-jobs-with-containers" id="toc-batch-jobs-with-containers" class="nav-link" data-scroll-target="#batch-jobs-with-containers">Batch Jobs with Containers</a></li>
   </ul></li>
-  <li><a href="#extras" id="toc-extras" class="nav-link" data-scroll-target="#extras">Extras</a></li>
-  <li><a href="#extras-1-including-data" id="toc-extras-1-including-data" class="nav-link" data-scroll-target="#extras-1-including-data">Extras 1: Including Data</a></li>
-  <li><a href="#extras-2-version-control" id="toc-extras-2-version-control" class="nav-link" data-scroll-target="#extras-2-version-control">Extras 2: Version Control</a></li>
-  <li><a href="#extras-3-uploading-to-cranbioconductor" id="toc-extras-3-uploading-to-cranbioconductor" class="nav-link" data-scroll-target="#extras-3-uploading-to-cranbioconductor">Extras 3: Uploading to CRAN/Bioconductor</a></li>
+  <li><a href="#troubleshooting-tips" id="toc-troubleshooting-tips" class="nav-link" data-scroll-target="#troubleshooting-tips">Troubleshooting Tips</a></li>
   </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Containers</h1>
+</div>
 
 
 
+<div class="quarto-title-meta">
 
-<section id="r-packages" class="level1">
-<h1>R Packages</h1>
-<section id="making-r-packages" class="level2">
-<h2 class="anchored" data-anchor-id="making-r-packages">Making R Packages</h2>
-<p>When writing a methodological paper, it is a good idea to make your code publicly available, since it will be much easier for others to use your method on their own data. One way to do this is to create an R package.</p>
-<p>R packages can be complicated, but the easiest way to get started is to make a <strong>bare-bones, minimal R package</strong> and then add complexity. This article will show you how!</p>
-<p><strong>Note</strong>: These instructions are blatantly stolen from <a href="https://hilaryparker.com/2014/04/29/writing-an-r-package-from-scratch/">Hilary Parker’s article</a>, <a href="https://kbroman.org/pkg_primer/">Karl Broman’s article</a>, <a href="https://andy1764.github.io/Making%20an%20R%20Package/Making-an-R-Package.html">Andrew’s slides</a>, and Danni’s teaching materials from BSTA 670. Everything was tested on R version 4.1.3.</p>
-</section>
-<section id="tldr-you-can-make-an-r-package-with-3-lines-of-code" class="level2">
-<h2 class="anchored" data-anchor-id="tldr-you-can-make-an-r-package-with-3-lines-of-code">TLDR; You Can Make an R Package with 3 Lines of Code</h2>
-<ul>
-<li><code>devtools::create()</code></li>
-<li><code>devtools::document()</code></li>
-<li><code>devtools::install()</code></li>
-</ul>
-</section>
-<section id="example-pennsive_stuff" class="level2">
-<h2 class="anchored" data-anchor-id="example-pennsive_stuff">Example: <code>pennsive_stuff</code></h2>
-<p>Our goal is to make a minimal package called <code>pennsive_stuff</code>, consisting of 2 R functions. Suppose these functions are located in two <code>.R</code> files, <code>nl.R</code> and <code>plot_dist.R</code>, containing the following:</p>
-<ul>
-<li><code>nl()</code>: a function that prints new lines in R Markdown documents.</li>
-</ul>
-<pre><code># Contents of nl.R
-nl &lt;- function(){
-  cat("  \n")
-  cat("  \n")
-}</code></pre>
-<ul>
-<li><code>plot_dist()</code>: a function that plots the distribution of a variable in a dataset.</li>
-</ul>
-<pre><code># Contents of plot_dist.R
-plot_dist &lt;- function(dat, var_name){
-  stopifnot(var_name %in% colnames(dat))
-  stopifnot(class(dat[,var_name]) == "numeric")
+    
   
-  p &lt;- ggplot2::ggplot(dat) +
-    ggplot2::geom_histogram(ggplot2::aes_string(x = var_name), bins = 30, 
-                            fill = wesanderson::wes_palettes$GrandBudapest2[1]) +
-    ggplot2::theme_minimal() +
-    ggplot2::labs(y = "Count", x = var_name)
+    
+  </div>
   
-  return(p)
-}</code></pre>
-<p>Note that <code>plot_dist()</code> contains dependencies from the <code>ggplot</code> and <code>wesanderson</code> packages.</p>
-<section id="install-r-packages-to-help-you-make-packages" class="level3">
-<h3 class="anchored" data-anchor-id="install-r-packages-to-help-you-make-packages">1. Install R packages to help you make packages</h3>
-<pre><code># Run in R
-install.packages(c("available", "usethis", "testthat", "pkgdown", "roxygen2", "devtools", "covr"))</code></pre>
-<p>(But how were <em>those</em> packages created?? Ooooo!)</p>
-<p>To make a super minimal package, you really only need <code>roxygen2</code> and <code>devtools</code>.</p>
-</section>
-<section id="a.-optional-check-that-your-package-name-is-valid" class="level3">
-<h3 class="anchored" data-anchor-id="a.-optional-check-that-your-package-name-is-valid">1a. (Optional) Check that your package name is valid</h3>
-<p>This will also check if the name has been taken on CRAN and other sites.</p>
-<pre><code># Run in R
-# Will look up your package name on CRAN, Bioconductor, and Github
-# Will also check the meaning of your package name on several websites
-available::available(name = "pennsive_stuff", browse = FALSE)</code></pre>
-</section>
-<section id="create-package-directory" class="level3">
-<h3 class="anchored" data-anchor-id="create-package-directory">2. Create Package Directory</h3>
-<pre><code># Run in R
-dir.package &lt;- [the directory on your computer that you'd like everything to be in]
-setwd(dir.package)
-devtools::create("pennsive_stuff")</code></pre>
-<p>This will automatically create a folder in your working directory called <code>pennsive_stuff</code>:</p>
-<pre><code># Run in R
-list.files("pennsive_stuff")</code></pre>
-<ul>
-<li><code>DESCRIPTION</code> has details about your package, which can be edited in an app like TextEdit (Mac) or WordPad (Windows).</li>
-<li><code>NAMESPACE</code> has the names of the objects in your package that will be made available upon <code>library()</code>ing it. It’s empty right now!</li>
-<li><code>R</code> is a folder that will hold all of your function <code>.R</code> files.</li>
-</ul>
-</section>
-<section id="add-functions-to-the-r-folder" class="level3">
-<h3 class="anchored" data-anchor-id="add-functions-to-the-r-folder">3. Add Functions to the R Folder</h3>
-<p>Each function that you want to include in the package should be in an <code>.R</code> file and placed in the folder <code>pennsive_stuff/R</code> that was created in Step 2. You can have one function per <code>.R</code> file, or organize multiple functions in one <code>.R</code> file. It doesn’t mattter!</p>
-<p>Let’s put the <code>.R</code> files, <code>nl.R</code> and <code>plot_dist.R</code>–which contain the code for <code>nl()</code> and <code>plot_dist()</code> respectively–into <code>pennsive_stuff/R</code>:</p>
-<pre><code># Run in R. 
-# Ensure that the two files, nl.R and plot_dist.R are in pennsive_stuff/R
-list.files(file.path("pennsive_stuff", "R"))</code></pre>
-</section>
-<section id="write-documentation-for-functions" class="level3">
-<h3 class="anchored" data-anchor-id="write-documentation-for-functions">4. Write Documentation for Functions</h3>
-<p>You know the nice notes that you see when you do e.g.&nbsp;<code>?sample</code>? We too can have nice things!</p>
-<p>The most tedious parts of documentation are taken care of through the <code>Roxygen2</code> package. All you have to do is add special comments at the start of the <code>.R</code> files that you just copied to <code>/pennsive_stuff/R</code>.</p>
-<p>Roxygen2 documentation is just extra lines added before the functions in the <code>.R</code> files and they look roughly like this:</p>
-<pre><code>#' Short summary of the function
-#'
-#' Description of the function
-#'
-#' @param param_name1 description of parameter/input 1
-#' @param param_name1 description of parameter/input 1
-#'
-#' @return description of what is returned
-#'
-#' @examples
-#' nl()
-#'
-#' @export</code></pre>
-<ul>
-<li>The final line <code>@export</code> adds this function to the NAMESPACE file, so that is accessible (i.e., via <code>pennsive_stuff::nl()</code> or after calling library). Otherwise, you would have to access it through the <code>:::</code> operator, à la <code>pennsive_stuff:::nl()</code>.</li>
-<li>There are many options for formatting these things (e.g., adding links, equations): see <a href="https://roxygen2.r-lib.org/articles/formatting.html">https://roxygen2.r-lib.org/articles/formatting.html</a>.</li>
-</ul>
-<p>For example, after adding documentation to <code>nl.R</code>, the file would look like:</p>
-<pre><code># Contents of nl.R
 
-#' Print new line in HTML files
-#'
-#' This function prints a new line in HTML files, which is useful when printing other things such as headers or plots.
-#'
-#' @return Returns nothing except some spaces!!
-#'
-#' @examples
-#' nl()
-#'
-#' @export
 
-nl &lt;- function(){
-  cat("  \n")
-  cat("  \n")
-}</code></pre>
-<p>For <code>plot_dist.R</code>, because the function depends on the <code>ggplot2</code> and <code>wesanderson</code> R packages, we would have an additional line for <code>@import</code> (imports everything in the namespace) and <code>@importFrom</code> (imports only a particular thing).</p>
-<pre><code># Contents of plot_dist.R
+</header>
 
-#' Plot Histogram
-#'
-#' Plot the histogram of a numeric variable within a data frame
-#'
-#' @param dat a data.frame containing the data to plot.
-#' @param var_name a character vector of the column name in the data.
-#'
-#' @return a histogram plot.
-#' @import ggplot2
-#' @importFrom wesanderson wes_palettes
-#'
-#' @examples
-#' plot_dist(dat = iris, var_name = "Petal.Length")
-#'
-#' @export
 
-plot_dist &lt;- function(dat, var_name){
-  stopifnot(var_name %in% colnames(dat))
-  stopifnot(class(dat[,var_name]) == "numeric")
-  
-  p &lt;- ggplot2::ggplot(dat) +
-    ggplot2::geom_histogram(ggplot2::aes_string(x = var_name), bins = 30, 
-                            fill = wesanderson::wes_palettes$GrandBudapest2[1]) +
-    ggplot2::theme_minimal() +
-    ggplot2::labs(y = "Count", x = var_name)
-  
-  return(p)
-}</code></pre>
-<section id="a.-process-documentation" class="level4">
-<h4 class="anchored" data-anchor-id="a.-process-documentation">4a. Process Documentation</h4>
-<pre><code># Run in R
-setwd(file.path(dir.package, "pennsive_stuff"))
-devtools::document()</code></pre>
-<p>After running <code>document()</code>, you will see some <code>.Rd</code> files automatically generated for you in the <code>man</code> folder:</p>
-<pre><code># Run in R
-list.files("man")</code></pre>
+<section id="containers" class="level1">
+<h1>Containers</h1>
+<p>Image processing software is notoriously challenging to install and manage due to the extensive dependencies they have on different libraries and other software packages. To address this, the field has developed a strong reliance on containerization, which is the practice of packing operating systems, libraries, and software into portable containers that can be shared (and are stable and less affected by system upgrades). There are two main systems we employ for containerization: Docker and Apptainer (formerly Singularity).</p>
+<p>Docker is widely used as a base for the development and use of containers. However, many high-performance computing environments use a system called apptainer as an alternative. Luckily, containers built using Docker are easily converted and run using apptainer. We use Apptainer extensively on the PMACS LPC as well as other systems.</p>
+<section id="pennsive-neuro-containers" class="level2">
+<h2 class="anchored" data-anchor-id="pennsive-neuro-containers">PennSIVE / neuro Containers</h2>
+<p>Over the years, our center has developed many image processing methods and software implementing these. To facilitate their sharing, and to simplify training new members of the community, we have assembled Docker containers with everything necessary to get started with image processing. These are distributed via Docker Hub but also are available directly on the cluster. Please note that these convenient packages contain openly available software from other developers that may be subject to licensing and use restrictions. The neurodocker effort (https://github.com/ReproNim/neurodocker) was key to the development of our containers. While for some time we used a container called “neuror” available on the pennsive Docker Hub page, our current versions of a container are simply called “pennsive” and are avaiable at https://hub.docker.com/repositories/russellshinohara and on the PMACS LPC in /project/singularity_images.</p>
+<p>We currently have two types of containers: the base containers, pennsive_amd64 and pennsive_arm64, and the torch-enabled containers, pennsive_amd64_cputorch and pennsive_amd64_gputorch. The two base containers are nearly identical except for their expected chip architecture; the pennsive_arm64 container is for use on Apple Silicon computers, and the pennsive_amd64 version is for use on the cluster. The torch-enabled versions are for use on intel/AMD-architecture machines including our clusters, and we have both a CPU version (for standard queues) and a GPU version (for use on the pennsivegpu queue).</p>
+</section>
+<section id="using-the-docker-container-on-your-mac" class="level2">
+<h2 class="anchored" data-anchor-id="using-the-docker-container-on-your-mac">Using the Docker Container on your Mac</h2>
+<p>As our group is Mac-centric, the following instructions are provided for use on a Apple Silicon-based Apple running Mac OS. However, if we are using a Linux-based laptop (or Windows, untested), we can employ similar commands using the amd64 base container (pennsive_amd64).</p>
+<p>As step zero, we need to install Docker Desktop which is available on the Docker website.</p>
+<p>First, to use a container we need to figure out which parts of your laptop’s filesystem you want it to be able to access. By default, this includes very little - so when you run the container and enter into your turn-key environment for image processing… there are no images to process, and there is nowhere to save your output. To fix this, we need to “bind-mount” locations in your computer’s (the host system) to places in the container’s file system. Suppose I want to mount my desktop.</p>
+<p>Next, we open a terminal. As we don’t yet have the docker container we need, which is pennsive_arm64, we need to pull it. We can do this with <code>docker pull russellshinohara/pennsive_arm64</code>. Next, we can run our container by simply writing:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-it</span> <span class="at">--rm</span> <span class="at">--platform</span> linux/arm64 <span class="dt">\</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--mount</span> type=bind,source=<span class="st">"/Users/</span><span class="va">$USER</span><span class="st">/Desktop"</span>,target=/desktop <span class="dt">\</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  russellshinohara/pennsive_arm64</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This command will run the container and give you a new prompt to do your coding within the container (and using all it’s installed tools). And, you’ll be able to easily access the files on your desktop on the host machine (your laptop), but they won’t be in /Users/$USER/Desktop but rather in /desktop. You can provide multiple –mount arguments to bind several different host machine directories (as is often necessary).</p>
+</section>
+<section id="using-the-docker-container-on-the-cluster" class="level2">
+<h2 class="anchored" data-anchor-id="using-the-docker-container-on-the-cluster">Using the Docker Container on the Cluster</h2>
+<section id="using-the-docker-container-on-the-cluster-in-interactive-mode" class="level3">
+<h3 class="anchored" data-anchor-id="using-the-docker-container-on-the-cluster-in-interactive-mode">Using the Docker Container on the Cluster in Interactive Mode</h3>
+<p>To use a container on the cluster, things are about as simple after logging into a compute node.</p>
+<p>First, let’s talk about the base image. To use this to conduct image processing, we need to first log into the cluster submit node, takim2. Once we’re there, we can select an appropriate queue for our processing. Unless we’re using deep learning methods, this is usually one of the standard queues. In interactive mode, this involves something like:</p>
+<pre><code>bsub -Is -q taki_interactive "bash"</code></pre>
+<p>And we need to load Apptainer:</p>
+<pre><code>module load apptainer</code></pre>
+<p>Then, we can run the container on the compute node with a simple call, and a bind mount:</p>
+<pre><code>apptainer shell \
+  --bind /project/myproject:/project_folder \
+  /project/singularity_images/pennsive_amd64.sif</code></pre>
+<p>Et voila! We can access R, etc.</p>
+</section>
+<section id="using-the-gpu-docker-container-on-the-cluster" class="level3">
+<h3 class="anchored" data-anchor-id="using-the-gpu-docker-container-on-the-cluster">Using the GPU Docker Container on the Cluster</h3>
+<p>If we want to use or develop deep learning methods, we need access to a GPU. To do this, we can use our GPU queue:</p>
+<pre><code>bsub -Is -q pennsivegpu -gpu num=1 bash</code></pre>
+<p>And we need to load Apptainer:</p>
+<pre><code>module load apptainer</code></pre>
+<p>And then, we can run with the –nv flag:</p>
+<pre><code>apptainer shell --nv \
+  --bind /project/myproject:/project_folder \
+  /project/singularity_images/pennsive_amd64_torchgpu.sif</code></pre>
+<p>And similarly, now we can run deep learning methods interactively.</p>
+</section>
+<section id="batch-jobs-with-containers" class="level3">
+<h3 class="anchored" data-anchor-id="batch-jobs-with-containers">Batch Jobs with Containers</h3>
+<p>Using a container for a batch job is just as easy. We only need to put that apptainer call into the script we run when we submit the job (with bsub) and everything will be wrapped up nicely. However, in batch mode we don’t need an interactive shell to work with; we just need apptainer to run a container. For example, we may want to run a shell script that has a command like:</p>
+<pre><code>apptainer exec --nv \
+  --bind /home/rshi/testdata/sub-001_T1w.nii.gz:/in/t1.nii.gz \
+  --bind /home/rshi/testdata/out:/out \
+  /project/singularity_images/hd-bet-0.3.0.sif \
+  hd-bet -i /in/t1.nii.gz -o /out/t1_stripped.nii.gz</code></pre>
+<p>This will take in a file testdata/sub-001_T1w.nii.gz in my home directory, and run HD-BET on it using Phil Cook’s container. It will then output a masked brain image in /home/rshi/testdata/out.</p>
 </section>
 </section>
-<section id="install-package" class="level3">
-<h3 class="anchored" data-anchor-id="install-package">5. Install Package</h3>
-<p>That was it! Easy, right? Now let’s install the package while in the directory containing the <code>pennsive_stuff</code> folder:</p>
-<pre><code># Run in R
-setwd(dir.package)
-devtools::install("pennsive_stuff")</code></pre>
-<p>Now you have the package!! You can call the <code>library</code> command from anywhere (on your computer) now.</p>
-<pre><code># Run in R
-library(pennsive_stuff)
-nl()
-plot_dist(dat = iris, var_name = "Petal.Length")</code></pre>
-<p>And you can see the results of the <code>Roxygen2</code> documentation here:</p>
-<pre><code># Run in R
-?nl()
-?plot_dist()</code></pre>
-<p>Great job!</p>
-</section>
-</section>
-<section id="extras" class="level2">
-<h2 class="anchored" data-anchor-id="extras">Extras</h2>
-<p>You have a basic R package; everything else is gravy. Here are some more things you can do with your package:</p>
-<ul>
-<li>Include data.</li>
-<li>Upload to Github, which allows your package to be installed via <code>devtools::install_github()</code>.</li>
-<li>Uplaod to CRAN or Bioconductor.</li>
-</ul>
-</section>
-<section id="extras-1-including-data" class="level2">
-<h2 class="anchored" data-anchor-id="extras-1-including-data">Extras 1: Including Data</h2>
-<p>Some packages come with data (e.g.&nbsp;<code>refund::DTI</code>) that accompany the functions. Suppose we also want the package to contain the dataset <code>iris2</code>.</p>
-<p>In the package directory, create a folder called <code>data</code>:</p>
-<pre><code># Run in R
-if (!dir.exists(file.path(dir.package, "pennsive_stuff/data"))) dir.create(file.path(dir.package, "pennsive_stuff/data"))</code></pre>
-<p>The easiest way to save the data in the <code>data</code> folder is to use <code>usethis::usedata()</code>:</p>
-<pre><code># Run in R
-set.seed(382349)
-iris2 = iris[sample(x = 1:nrow(iris), size = 100, replace = TRUE),]
-
-setwd(file.path(dir.package, "pennsive_stuff"))
-usethis::use_data(iris2, iris2)</code></pre>
-<p>Then, you’ll need to create an R file named <code>data.R</code> in the <code>R</code> folder, where your other R functions are stored.</p>
-<p>Similar to the <code>Roxygen2</code> documentation for functions, the <code>data.R</code> file needs to contain the following:</p>
-<pre><code># Contents of data.R
-
-#' Edgar Anderson's Iris Data
-#'
-#' This famous (Fisher's or Anderson's) iris data set gives the measurements in 
-#' centimeters of the variables sepal length and width and petal length and width, 
-#' respectively, for 50 flowers from each of 3 species of iris. The species are 
-#' Iris setosa, versicolor, and virginica.
-#'
-#' @docType data
-#'
-#' @usage data(iris2)
-#'
-#' @format \code{"iris"} is a data frame with 150 cases (rows) and 5 variables
-#'  (columns) named Sepal.Length, Sepal.Width, Petal.Length, Petal.Width, and Species.
-#'
-#' @keywords datasets
-#'
-#' @references Becker, R. A., Chambers, J. M. and Wilks, A. R. (1988) 
-#' The New S Language. Wadsworth &amp; Brooks/Cole. 
-
-#'
-#' @source \href{https://phenome.jax.org/projects/Moore1b}{QTL Archive}
-#'
-#' @examples
-#' data(iris2)
-#' plot_dist(dat = iris2, var_name = "Petal.Width")
-"iris2"</code></pre>
-<p>Now you can re-document and re-install the package and get the <code>iris2</code> data using <code>data(iris2)</code>!</p>
-<pre><code># Run in R
-
-devtools::document()
-
-setwd(file.path(dir.package))
-devtools::install("pennsive_stuff")
-library(pennsive_stuff)
-
-data(iris2)
-plot_dist(dat = iris2, var_name = "Sepal.Length")
-?iris2</code></pre>
-</section>
-<section id="extras-2-version-control" class="level2">
-<h2 class="anchored" data-anchor-id="extras-2-version-control">Extras 2: Version Control</h2>
-<p>Keep track of the versions of your package using Git. Once you set up a Git repo in your local drive, it’s easy to share it on Github (as easy as anything with Git/Github, anyways…)</p>
-<section id="e2.1.-create-git-repo-in-package-folder" class="level4">
-<h4 class="anchored" data-anchor-id="e2.1.-create-git-repo-in-package-folder">E2.1. Create git repo in package folder</h4>
-<p>First, <code>cd</code> to the package folder <code>/pennsive_stuff/</code> in your Terminal and type</p>
-<pre><code># Run in terminal
-git init
-git add .
-git commit</code></pre>
-<p>If you are using RStudio and have opened the project <code>pennsive_stuff.Rproj</code>, you should see a “Git” tab in the Environment, History, Connections tab.</p>
-</section>
-<section id="e2.2.-create-repo-on-github" class="level4">
-<h4 class="anchored" data-anchor-id="e2.2.-create-repo-on-github">E2.2. Create repo on Github</h4>
-<p>Next, go to Github and make a new repo with the name as this package, <code>pennsive_stuff</code>. Leave the box for README unchecked!</p>
-<p>You may need to configure RStudio access to your Github account via a personal access token. Easy instructions here: <a href="https://gist.github.com/Z3tt/3dab3535007acf108391649766409421">https://gist.github.com/Z3tt/3dab3535007acf108391649766409421</a>.</p>
-</section>
-<section id="e2.3.-connect-repo-in-package-folder-to-github" class="level4">
-<h4 class="anchored" data-anchor-id="e2.3.-connect-repo-in-package-folder-to-github">E2.3. Connect repo in package folder to github</h4>
-<p>In terminal,</p>
-<pre class="{r}"><code># Run in terminal
-git remote add origin https://github.com/[your github-id]/pennsive_stuff
-git push origin HEAD:main</code></pre>
-<p>For more details, see <a href="https://andy1764.github.io/Making%20an%20R%20Package/Making-an-R-Package.html#47">https://andy1764.github.io/Making%20an%20R%20Package/Making-an-R-Package.html#47</a> and <a href="https://kbroman.org/pkg_primer/pages/github.html">https://kbroman.org/pkg_primer/pages/github.html</a>.</p>
-</section>
-</section>
-<section id="extras-3-uploading-to-cranbioconductor" class="level2">
-<h2 class="anchored" data-anchor-id="extras-3-uploading-to-cranbioconductor">Extras 3: Uploading to CRAN/Bioconductor</h2>
-<p>There are many hoops to jump through to put your package on CRAN. CRAN is maintained by volunteers, who manually check your R package (especially if it’s the first submission) in addition to all of the automated checks. <a href="https://kbroman.org/pkg_primer/pages/cran.html">https://kbroman.org/pkg_primer/pages/cran.html</a>.</p>
-<p>You can also put your package on Bioconductor, which is reportedly easier: <a href="https://bioconductor.org/developers/package-submission/">https://bioconductor.org/developers/package-submission/</a>.</p>
-<!--To view the wiki, cd to pennsive.github.io and run: bash run.sh -->
+<section id="troubleshooting-tips" class="level2">
+<h2 class="anchored" data-anchor-id="troubleshooting-tips">Troubleshooting Tips</h2>
+<p>If a problem arises when using a container, the easiest way to approach it is to default back into interactive mode. Often problems involve bind mounted directories where paths become complex. But don’t despair - this is SO much easier than trying to figure out which version of python you need and how to get it installed with the right version of some package you’ve never heard but that’s crucial for the task you need to complete!</p>
 
 
 </section>
