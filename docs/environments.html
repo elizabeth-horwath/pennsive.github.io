@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.8.27">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -67,14 +67,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="./">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-2471aefdb2301cb92d6a10697e245760.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-bd46602fe90269a447d98623afced56a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -115,7 +116,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    <img src="./logo.png" alt="" class="navbar-logo">
+    <img src="./logo.png" alt="" class="navbar-logo light-content">
+    <img src="./logo.png" alt="" class="navbar-logo dark-content">
     </a>
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">PennSIVE Wiki</span>
@@ -306,11 +308,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="setting-up-your-environment">Setting up your environment</h2>
 <p>Neuroimaging software can be difficult to install and have complex dependencies. If any tool has a different version or is configured differently, results can become impossible to reproduce. So we use containers which are like lightweight VMs that turn your environment into code so it can be shared, version controlled, and reproduced on any machine that supports a container runtime. On platforms where you have root access (like your computer), docker is the most convenient container runtime, but Singularity is a good alternative for rootless containers in cluster environments.</p>
 <p>There are some general purpose container images you can pull to do experimenting, but new projects with public results should create a project-specific container by writing a Dockerfile. NeuroDocker automates much of this process,</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">--rm</span> repronim/neurodocker:0.7.0 generate docker <span class="dt">\</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">--rm</span> repronim/neurodocker:0.7.0 generate docker <span class="dt">\</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">--pkg-manager</span> apt <span class="dt">\</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">--base</span> debian:buster <span class="dt">\</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">--ants</span> version=2.3.1 <span class="dt">\</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">--fsl</span> version=6.0.3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">--fsl</span> version=6.0.3</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>which will write a Dockerfile to stdout (you can pipe directly into <code>docker build</code>) but any software they don’t support has to be installed in that or another Dockerfile.</p>
 <hr>
 </section>
@@ -319,20 +321,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="docker" class="level3">
 <h3 class="anchored" data-anchor-id="docker">Docker</h3>
 <p>Running a container with docker follows the format: <code>docker run [options for docker] image_name [payload process arguments]</code>. For example,</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-it</span> <span class="at">-v</span> <span class="va">$PWD</span>:/data <span class="at">-w</span> /data <span class="at">--rm</span> pennsive/neuror:4.0 R <span class="at">-e</span> <span class="st">"list.files()"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-it</span> <span class="at">-v</span> <span class="va">$PWD</span>:/data <span class="at">-w</span> /data <span class="at">--rm</span> pennsive/neuror:4.0 R <span class="at">-e</span> <span class="st">"list.files()"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>will run the pennsive/neuror container interactively (<code>-it</code>), setting up a bind mount (<code>-v</code>), setting the working directory for the payload process to that bind mount (<code>-w</code>), and remove the container after completion (<code>--rm</code>). <a href="https://docs.docker.com/docker-for-mac/install/">Download</a> docker desktop for mac.</p>
 </section>
 <section id="visual-studio-code" class="level3">
 <h3 class="anchored" data-anchor-id="visual-studio-code">Visual Studio Code</h3>
 <p><a href="https://code.visualstudio.com/download">Download</a> vs code for mac, then install all the essential extensions with</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span> code <span class="kw">&amp;&amp;</span> <span class="cf">for</span> extension <span class="kw">in</span> <span class="va">$(</span><span class="ex">curl</span> <span class="at">-s</span> https://raw.githubusercontent.com/PennSIVE/pennsive.github.io/main/vs-code-extension-list.txt<span class="va">)</span><span class="kw">;</span> <span class="cf">do</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span> code <span class="kw">&amp;&amp;</span> <span class="cf">for</span> extension <span class="kw">in</span> <span class="va">$(</span><span class="ex">curl</span> <span class="at">-s</span> https://raw.githubusercontent.com/PennSIVE/pennsive.github.io/main/vs-code-extension-list.txt<span class="va">)</span><span class="kw">;</span> <span class="cf">do</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">code</span> <span class="at">--install-extension</span> <span class="va">$extension</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span> <span class="kw">||</span> <span class="bu">echo</span> <span class="st">"in the vscode command pallet (command + shift + p) search for </span><span class="dt">\"</span><span class="st">Install code command in 'PATH'</span><span class="dt">\"</span><span class="st">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span> <span class="kw">||</span> <span class="bu">echo</span> <span class="st">"in the vscode command pallet (command + shift + p) search for </span><span class="dt">\"</span><span class="st">Install code command in 'PATH'</span><span class="dt">\"</span><span class="st">"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="startup-scripts" class="level3">
 <h3 class="anchored" data-anchor-id="startup-scripts">Startup scripts</h3>
 <p>Clone the lab’s bash/zsh <a href="https://github.com/PennSIVE/bash">startup scripts</a>, which creates some convenient aliases</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/repos</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/repos</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/PennSIVE/bash.git</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> bash</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> .env.sample .env</span>
@@ -340,7 +342,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># open your ~/.bashrc or ~/.zshrc and add:</span></span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="ot">-f</span> <span class="va">$HOME</span>/repos/bash/.bashrc <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">source</span> <span class="va">$HOME</span>/repos/bash/.bashrc</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Try creating a SSH tunnel for HTTP traffic (<code>takimhttp</code> or <code>cbicahttp</code>) then starting R studio with <code>rstudio</code> (which should then be available at <a href="http://localhost">http://localhost</a>).</p>
 </section>
 <section id="other-tools" class="level3">
@@ -419,13 +421,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
