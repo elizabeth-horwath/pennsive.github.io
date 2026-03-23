@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>PennSIVE Wiki</title>
+<title>neurohacking – PennSIVE Wiki</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -22,41 +22,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -132,7 +97,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="./index.html"> 
 <span class="menu-text">Welcome</span></a>
   </li>  
 </ul>
@@ -161,7 +126,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./neurohacking.html">Neurohacking</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -259,7 +224,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./neurohacking.html" class="sidebar-item-text sidebar-link">
+  <a href="./neurohacking.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Neurohacking</span></a>
   </div>
 </li>
@@ -285,7 +250,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#welcome-to-the-penn-statistics-in-imaging-and-visualization-endeavor-pennsive-center" id="toc-welcome-to-the-penn-statistics-in-imaging-and-visualization-endeavor-pennsive-center" class="nav-link active" data-scroll-target="#welcome-to-the-penn-statistics-in-imaging-and-visualization-endeavor-pennsive-center">Welcome to the Penn Statistics in Imaging and Visualization Endeavor (PennSIVE) Center</a></li>
+  <li><a href="#neurohacking" id="toc-neurohacking" class="nav-link active" data-scroll-target="#neurohacking">Neurohacking</a>
+  <ul class="collapse">
+  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#core-components" id="toc-core-components" class="nav-link" data-scroll-target="#core-components">Core Components</a>
+  <ul class="collapse">
+  <li><a href="#neuroimaging-data" id="toc-neuroimaging-data" class="nav-link" data-scroll-target="#neuroimaging-data">Neuroimaging Data</a></li>
+  <li><a href="#processing-pipelines" id="toc-processing-pipelines" class="nav-link" data-scroll-target="#processing-pipelines">Processing Pipelines</a></li>
+  <li><a href="#visualization" id="toc-visualization" class="nav-link" data-scroll-target="#visualization">Visualization</a></li>
+  </ul></li>
+  <li><a href="#neurohacking-in-r" id="toc-neurohacking-in-r" class="nav-link" data-scroll-target="#neurohacking-in-r">Neurohacking in R</a></li>
+  <li><a href="#applications" id="toc-applications" class="nav-link" data-scroll-target="#applications">Applications</a></li>
+  <li><a href="#example-of-what-you-can-do-with-neurohacking" id="toc-example-of-what-you-can-do-with-neurohacking" class="nav-link" data-scroll-target="#example-of-what-you-can-do-with-neurohacking">Example of what you can do with Neurohacking!</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -295,19 +274,104 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<section id="welcome-to-the-penn-statistics-in-imaging-and-visualization-endeavor-pennsive-center" class="level1">
-<h1>Welcome to the Penn Statistics in Imaging and Visualization Endeavor (PennSIVE) Center</h1>
-<p>This is the internal website for PennSIVE tutorials and best practices.</p>
-<p>If you just got cluster access, first setup your SSH keys:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh-keygen</span> <span class="co"># if you've never done this or aren't sure; you can accept all the defaults, and don't need a passphrase</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">ssh-copy-id</span> user@cluster</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Then download VS code, docker, and read through the <a href="./environment-setup/">environment setup guide</a>.</p>
-<p>When setting up a project meant for publication, read through the <a href="./project-setup/">project setup guide</a> which explains how to version control code with git, track data provenance with datalad, and keep data organized according to the BIDS standard.</p>
-<p>For more specific python neuroimaging tutorials, see the many <a href="https://nipype.readthedocs.io/en/latest/examples.html">nipype examples</a>. For more specific R neuroimaging tutorials, see <a href="https://neuroconductor.org/tutorials">neuroconductor</a>.</p>
-<p>The <a href="https://cbica-wiki.uphs.upenn.edu">CBICA wiki</a> (UPHS VPN required) is a good resource for CUBIC-specific tutorials, and <a href="https://www.alessandravalcarcel.com/blog/">Ali’s blog</a> offers lots of useful PMACS-specific information.</p>
-<p>Also see the <a href="https://pennlinc.github.io">PennLINC internal website</a> which offers many useful tutorials and tips.</p>
+<section id="neurohacking" class="level1">
+<h1>Neurohacking</h1>
+<p>Neurohacking, in the context of PennSIVE and computational neuroscience, refers to the use of programming tools in R to manipulate, process, and analyze neuroimaging data such as MRI scans.</p>
+<p>This approach focuses on practical, reproducible workflows for working with brain imaging data, including reading image formats, performing preprocessing steps, and generating visualizations for analysis and interpretation.</p>
+<p><a href="https://www.coursera.org/learn/neurohacking">Neurohacking in R Coursera Course</a></p>
+<p>The best way to learn about neurohacking in R is through the official Coursera course taught by instructors from Johns Hopkins from the link above.</p>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>Modern neurohacking workflows are centered around structural MRI data and commonly use standardized formats such as NIfTI. Using R and specialized packages, researchers can:</p>
+<ul>
+<li>Read and write brain imaging data<br>
+</li>
+<li>Explore and visualize brain structures<br>
+</li>
+<li>Perform preprocessing steps such as brain extraction and image correction<br>
+</li>
+<li>Align images across subjects or to standard templates</li>
+</ul>
+<p>These workflows allow us to manipulate raw imaging data to analyzable and interpretable outputs.</p>
+</section>
+<section id="core-components" class="level2">
+<h2 class="anchored" data-anchor-id="core-components">Core Components</h2>
+<section id="neuroimaging-data" class="level3">
+<h3 class="anchored" data-anchor-id="neuroimaging-data">Neuroimaging Data</h3>
+<p>Neurohacking primarily works with MRI data, which captures structural information about the brain. These images are stored in formats like NIfTI, designed for efficient storage and analysis of multidimensional brain data.</p>
+</section>
+<section id="processing-pipelines" class="level3">
+<h3 class="anchored" data-anchor-id="processing-pipelines">Processing Pipelines</h3>
+<p>A typical neurohacking pipeline includes several key steps:</p>
+<ul>
+<li><strong>Inhomogeneity correction</strong> – adjusting for intensity variations in MRI scans<br>
+</li>
+<li><strong>Brain extraction (skull stripping)</strong> – isolating brain tissue from non-brain structures<br>
+</li>
+<li><strong>Image registration</strong> – aligning images within or across subjects<br>
+</li>
+<li><strong>Segmentation</strong> – identifying tissue types such as gray matter, white matter, and CSF</li>
+</ul>
+<p>These steps ensure that data are standardized and suitable for downstream analysis.</p>
+</section>
+<section id="visualization" class="level3">
+<h3 class="anchored" data-anchor-id="visualization">Visualization</h3>
+<p>Visualization is a critical part of neurohacking. R provides tools to:</p>
+<ul>
+<li>Display 2D slices of brain images<br>
+</li>
+<li>Generate 3D brain visualizations<br>
+</li>
+<li>Map statistical results onto brain regions</li>
+</ul>
+<p>Visualization helps researchers interpret spatial patterns in neural data and communicate results effectively.</p>
+</section>
+</section>
+<section id="neurohacking-in-r" class="level2">
+<h2 class="anchored" data-anchor-id="neurohacking-in-r">Neurohacking in R</h2>
+<p>R is commonly used in neurohacking due to its strong ecosystem for data analysis and reproducibility. Neurohacking workflows in R typically involve:</p>
+<ul>
+<li>Loading neuroimaging data into R environments<br>
+</li>
+<li>Applying transformations and preprocessing steps<br>
+</li>
+<li>Using packages for visualization and statistical analysis<br>
+</li>
+<li>Creating reproducible scripts and pipelines</li>
+</ul>
+</section>
+<section id="applications" class="level2">
+<h2 class="anchored" data-anchor-id="applications">Applications</h2>
+<p>Neurohacking techniques are used in a range of research contexts, including:</p>
+<ul>
+<li>Studying brain structure and anatomy<br>
+</li>
+<li>Investigating neurological and psychiatric conditions<br>
+</li>
+<li>Developing and testing imaging pipelines<br>
+</li>
+<li>Visualizing brain-based statistical results</li>
+</ul>
+<p>By combining programming with neuroimaging, neurohacking enables more efficient and scalable analysis of complex brain data.</p>
+</section>
+<section id="example-of-what-you-can-do-with-neurohacking" class="level2">
+<h2 class="anchored" data-anchor-id="example-of-what-you-can-do-with-neurohacking">Example of what you can do with Neurohacking!</h2>
+<p>Here we have an image of a brain slice from an MRI scan that is a grayscale image with a black background at intensity = 0. Images can be transformed as shown here through linear transfer function and linear spline transformation to have the features appear more prominently. Then, smoothing can be utilized to “smooth” out the noise in the picture through techniques such as Gaussian smoothing.</p>
+<p><img src="images/neurohacking/example.png" class="img-fluid"></p>
+</section>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<p>Neurohacking represents the intersection of neuroscience, data science, and programming. By leveraging tools like R, researchers can process, analyze, and visualize brain imaging data in a reproducible and scalable way, forming the foundation for modern neuroimaging workflows.</p>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<ol type="1">
+<li><p>Image from Visualizing Brains Using R. Medium. <a href="https://medium.com/data-science/visualizing-brains-using-r-606fa0fb9fdf">Website for image</a></p></li>
+<li><p>Coursera course for Neurohacking in R. <a href="https://www.coursera.org/learn/neurohacking">Neurohacking in R Coursera Course</a></p></li>
+</ol>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
