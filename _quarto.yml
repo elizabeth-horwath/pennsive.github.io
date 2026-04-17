@@ -36,6 +36,7 @@ website:
     - python.md
     - pennsive_neuro_pip_instructions.qmd
     - neurohacking.qmd
+    - data-visualization.qmd
     - containers.qmd
     - contributing.qmd
 
