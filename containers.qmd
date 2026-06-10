@@ -47,36 +47,41 @@ bsub -Is -q taki_interactive "bash"
 ```
 
 And we need to load Apptainer:
-```
+
+```         
 module load apptainer
 ```
 
 Then, we can run the container on the compute node with a simple call, and a bind mount:
-```
+
+```         
 apptainer shell \
   --bind /project/myproject:/project_folder \
-  /project/singularity_images/pennsive_amd64.sif
+  /project/singularity_images/pennsive_amd64_cputorch.sif
 ```
+
 Et voila! We can access R, etc.
 
 ### Using the GPU Docker Container on the Cluster
 
 If we want to use or develop deep learning methods, we need access to a GPU. To do this, we can use our GPU queue:
 
-```
+```         
 bsub -Is -q pennsivegpu -gpu num=1 bash
 ```
 
 And we need to load Apptainer:
-```
+
+```         
 module load apptainer
 ```
 
 And then, we can run with the --nv flag:
-```
+
+```         
 apptainer shell --nv \
   --bind /project/myproject:/project_folder \
-  /project/singularity_images/pennsive_amd64_torchgpu.sif
+  /project/singularity_images/pennsive_amd64_gputorch.sif
 ```
 
 And similarly, now we can run deep learning methods interactively.
@@ -85,7 +90,7 @@ And similarly, now we can run deep learning methods interactively.
 
 Using a container for a batch job is just as easy. We only need to put that apptainer call into the script we run when we submit the job (with bsub) and everything will be wrapped up nicely. However, in batch mode we don't need an interactive shell to work with; we just need apptainer to run a container. For example, we may want to run a shell script that has a command like:
 
-```
+```         
 apptainer exec --nv \
   --bind /home/rshi/testdata/sub-001_T1w.nii.gz:/in/t1.nii.gz \
   --bind /home/rshi/testdata/out:/out \
