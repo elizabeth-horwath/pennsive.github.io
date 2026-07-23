@@ -103,3 +103,8 @@ This will take in a file testdata/sub-001_T1w.nii.gz in my home directory, and r
 ## Troubleshooting Tips
 
 If a problem arises when using a container, the easiest way to approach it is to default back into interactive mode. Often problems involve bind mounted directories where paths become complex. But don't despair - this is SO much easier than trying to figure out which version of python you need and how to get it installed with the right version of some package you've never heard but that's crucial for the task you need to complete!
+
+
+Written by: Taki Shinohara
+Last Updated: July 23, 2026
+
