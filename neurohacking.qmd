@@ -1,7 +1,9 @@
 # Neurohacking
+Created by: Gina Yu 
 
-Neurohacking, in the context of PennSIVE and computational neuroscience, refers to the use of programming tools in R to manipulate, process, and analyze neuroimaging data such as MRI scans.  
+Last Updated: July 30,2026
 
+Neurohacking, in the context of PennSIVE and computational neuroscience, refers to the use of computational tools to manipulate, process, and analyze neuroimaging data such as MRI scans. Within PennSIVE, these workflows are commonly taught using R.
 This approach focuses on practical, reproducible workflows for working with brain imaging data, including reading image formats, performing preprocessing steps, and generating visualizations for analysis and interpretation.
 
 [Neurohacking in R Coursera Course](https://www.coursera.org/learn/neurohacking)
@@ -18,6 +20,8 @@ Modern neurohacking workflows are centered around structural MRI data and common
 - Align images across subjects or to standard templates  
 
 These workflows allow us to manipulate raw imaging data to analyzable and interpretable outputs.
+
+Common packages used throughout neurohacking workflows include packages from the `neuroconductor` and `neurobase` ecosystems, which provide tools for reading, processing, visualizing, and analyzing neuroimaging data.
 
 ## Core Components
 
@@ -70,7 +74,7 @@ By combining programming with neuroimaging, neurohacking enables more efficient 
 ## Example of what you can do with Neurohacking! 
 
 Here we have an image of a brain slice from an MRI scan that is a grayscale image with a black background at intensity = 0. 
-Images can be transformed as shown here through linear transfer function and linear spline transformation to have the features appear more prominently. 
+This example demonstrates several common image preprocessing techniques. Starting from a raw MRI slice, intensity transformations can improve image contrast, while Gaussian smoothing reduces image noise and improves visualization. These preprocessing steps are commonly performed before downstream statistical analyses or image segmentation.
 Then, smoothing can be utilized to "smooth" out the noise in the picture through techniques such as Gaussian smoothing. 
 
 ![](images/neurohacking/example.png)
@@ -80,6 +84,8 @@ Then, smoothing can be utilized to "smooth" out the noise in the picture through
 ## Summary
 
 Neurohacking represents the intersection of neuroscience, data science, and programming. By leveraging tools like R, researchers can process, analyze, and visualize brain imaging data in a reproducible and scalable way, forming the foundation for modern neuroimaging workflows.
+
+For practical examples of running neuroimaging workflows on the PennSIVE computing environment, see the Cluster Computing and Data Visualization sections of this wiki.
 
 ## References
 1. Image from Visualizing Brains Using R. Medium. [Website for image](https://medium.com/data-science/visualizing-brains-using-r-606fa0fb9fdf)

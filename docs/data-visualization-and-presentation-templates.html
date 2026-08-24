@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.36">
+<meta name="generator" content="quarto-1.9.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>data-visualization – PennSIVE Wiki</title>
+<title>data-visualization-and-presentation-templates – PennSIVE Wiki</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -39,7 +39,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-d04319935e1086c4c8c66920e2110a00.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
@@ -126,7 +126,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./data-visualization.html">Data Visualization Tools</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./data-visualization-and-presentation-templates.html">Data Visualization Tools and Presentation Templates</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -176,6 +176,12 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./data-visualization-and-presentation-templates.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Data Visualization Tools and Presentation Templates</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./workflows.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Nipype workflows</span></a>
   </div>
@@ -196,6 +202,12 @@ ul.task-list li input[type="checkbox"] {
   <div class="sidebar-item-container"> 
   <a href="./cluster_rstudio.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">RStudio/Jupyter Lab on Cluster</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cluster-screen.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Using <code>screen</code> on the Cluster</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -230,12 +242,6 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./data-visualization.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Data Visualization Tools</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./containers.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Containers</span></a>
   </div>
@@ -256,7 +262,7 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#data-visualization-tools" id="toc-data-visualization-tools" class="nav-link active" data-scroll-target="#data-visualization-tools">Data Visualization Tools</a>
+  <li><a href="#data-visualization-tools-and-presentation-templates" id="toc-data-visualization-tools-and-presentation-templates" class="nav-link active" data-scroll-target="#data-visualization-tools-and-presentation-templates">Data Visualization Tools and Presentation Templates</a>
   <ul class="collapse">
   <li><a href="#adobe-illustrator" id="toc-adobe-illustrator" class="nav-link" data-scroll-target="#adobe-illustrator">Adobe Illustrator</a>
   <ul class="collapse">
@@ -270,8 +276,22 @@ ul.task-list li input[type="checkbox"] {
   <ul class="collapse">
   <li><a href="#common-uses-in-biostatistics-2" id="toc-common-uses-in-biostatistics-2" class="nav-link" data-scroll-target="#common-uses-in-biostatistics-2">Common Uses in Biostatistics</a></li>
   </ul></li>
-  <li><a href="#example-workflow-in-pennsive" id="toc-example-workflow-in-pennsive" class="nav-link" data-scroll-target="#example-workflow-in-pennsive">Example workflow in PennSIVE</a></li>
-  <li><a href="#links-to-data-visualization-resources" id="toc-links-to-data-visualization-resources" class="nav-link" data-scroll-target="#links-to-data-visualization-resources">Links to Data Visualization Resources</a></li>
+  <li><a href="#poster-and-slide-templates" id="toc-poster-and-slide-templates" class="nav-link" data-scroll-target="#poster-and-slide-templates">Poster and Slide Templates</a></li>
+  <li><a href="#general-figure-design-principles" id="toc-general-figure-design-principles" class="nav-link" data-scroll-target="#general-figure-design-principles">General Figure Design Principles</a></li>
+  <li><a href="#export-recommendations" id="toc-export-recommendations" class="nav-link" data-scroll-target="#export-recommendations">Export Recommendations</a>
+  <ul class="collapse">
+  <li><a href="#what-is-svg" id="toc-what-is-svg" class="nav-link" data-scroll-target="#what-is-svg">What is SVG?</a></li>
+  </ul></li>
+  <li><a href="#example-workflow-in-pennsive" id="toc-example-workflow-in-pennsive" class="nav-link" data-scroll-target="#example-workflow-in-pennsive">Example Workflow in PennSIVE</a></li>
+  <li><a href="#links-to-data-visualization-resources" id="toc-links-to-data-visualization-resources" class="nav-link" data-scroll-target="#links-to-data-visualization-resources">Links to Data Visualization Resources</a>
+  <ul class="collapse">
+  <li><a href="#software" id="toc-software" class="nav-link" data-scroll-target="#software">Software</a></li>
+  </ul></li>
+  <li><a href="#poster-printing" id="toc-poster-printing" class="nav-link" data-scroll-target="#poster-printing">Poster Printing</a></li>
+  <li><a href="#poster-and-slide-templates-1" id="toc-poster-and-slide-templates-1" class="nav-link" data-scroll-target="#poster-and-slide-templates-1">Poster and Slide Templates</a>
+  <ul class="collapse">
+  <li><a href="#available-templates" id="toc-available-templates" class="nav-link" data-scroll-target="#available-templates">Available Templates</a></li>
+  </ul></li>
   </ul></li>
   </ul>
 </nav>
@@ -282,69 +302,193 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section id="data-visualization-tools" class="level1">
-<h1>Data Visualization Tools</h1>
-<p>This section is a quick overview of potential resources that can be utilized for data visualization: communciating data, results, and concepts through visual representations such as figures and diagrams.</p>
-<p>Here are some examples.</p>
+<section id="data-visualization-tools-and-presentation-templates" class="level1">
+<h1>Data Visualization Tools and Presentation Templates</h1>
+<p>Created by: Gina Yu</p>
+<p>Last Updated: July 30,2026</p>
+<p>This page provides a brief overview of software and resources commonly used for scientific data visualization. While statistical software such as R and Python are used to generate figures, additional design software can help transform these outputs into publication-quality figures, posters, presentations, and graphical abstracts.</p>
+<p>Below are several commonly used tools and resources within biostatistics and neuroimaging research.</p>
 <section id="adobe-illustrator" class="level2">
 <h2 class="anchored" data-anchor-id="adobe-illustrator">Adobe Illustrator</h2>
-<p>Used for editing and combining figures as a vector graphics editor.</p>
+<p>Adobe Illustrator is a vector graphics editor commonly used for editing and combining figures generated from statistical software.</p>
 <section id="common-uses-in-biostatistics" class="level3">
 <h3 class="anchored" data-anchor-id="common-uses-in-biostatistics">Common Uses in Biostatistics</h3>
 <ul>
-<li>Editing plots exported from R (e.g., ggplot2 figures)</li>
-<li>Can assist with combining multiple plots aesthetically</li>
-<li>Adjusts labels, fonts, and colors</li>
-<li>Can create schematic diagrams</li>
+<li>Editing plots exported from R (e.g., <code>ggplot2</code> figures)</li>
+<li>Combining multiple plots into publication-quality multi-panel figures</li>
+<li>Adjusting fonts, labels, colors, and spacing</li>
+<li>Creating schematic diagrams to accompany statistical results</li>
 </ul>
-<p>Illustrator’s effectiveness lies in its use in vector graphics, which means that the figures can be resized without loss in quality. Adobe Illustrator is not to be confused with Adobe Photoshop, a commonly used tool that is used to manipulate images, whereas Illustrator focuses on figure design and layout.</p>
+<p>Illustrator works with vector graphics, allowing figures to be resized without losing quality. It is not to be confused with Adobe Photoshop, which focuses primarily on editing raster images and photographs. Illustrator is generally the preferred software for figure design and layout.</p>
 </section>
 </section>
 <section id="biorender" class="level2">
 <h2 class="anchored" data-anchor-id="biorender">BioRender</h2>
-<p>Used for creating scientific diagrams. Often used to explain basic wet lab techniques.</p>
+<p>BioRender is a web-based platform designed for creating scientific diagrams and conceptual illustrations. Although it is commonly used in wet-lab and biological research, it can also be valuable for communicating statistical methods and study designs.</p>
 <section id="common-uses-in-biostatistics-1" class="level3">
 <h3 class="anchored" data-anchor-id="common-uses-in-biostatistics-1">Common Uses in Biostatistics</h3>
 <ul>
-<li>Biological pathway diagrams and simulation structures</li>
+<li>Biological pathway diagrams</li>
+<li>Simulation workflow diagrams</li>
+<li>Study design illustrations</li>
 <li>Graphical abstracts</li>
-<li>Conceptual figures for study design clarity</li>
+<li>Conceptual figures explaining statistical methods</li>
 </ul>
+<p>BioRender provides an extensive library of scientific icons and templates, allowing users to create professional-quality figures without advanced graphic design experience.</p>
 </section>
 </section>
 <section id="adobe-indesign" class="level2">
 <h2 class="anchored" data-anchor-id="adobe-indesign">Adobe InDesign</h2>
-<p>Used for desgining posters and layouts. Organizes text and graphics.</p>
+<p>Adobe InDesign is a publishing and layout program used to organize figures, text, and graphics into cohesive documents.</p>
 <section id="common-uses-in-biostatistics-2" class="level3">
 <h3 class="anchored" data-anchor-id="common-uses-in-biostatistics-2">Common Uses in Biostatistics</h3>
 <ul>
 <li>Designing conference posters</li>
-<li>Reports and manuscripts with figures that you can integrate</li>
-<li>Arrange multiple visualizations into one layout</li>
-<li>Presentation materials</li>
+<li>Creating reports and manuscripts with integrated figures</li>
+<li>Arranging multiple visualizations into a single layout</li>
+<li>Preparing presentation materials</li>
 </ul>
-<p>InDesign is especially useful with combining multiple figures.</p>
+<p>InDesign is particularly useful when assembling multiple figures into posters or presentation materials while maintaining consistent formatting.</p>
+</section>
+</section>
+<section id="poster-and-slide-templates" class="level2">
+<h2 class="anchored" data-anchor-id="poster-and-slide-templates">Poster and Slide Templates</h2>
+<p>Rather than designing every presentation or poster from scratch, many researchers begin with pre-existing templates.</p>
+<p>Common examples include:</p>
+<ul>
+<li>Conference poster templates</li>
+<li>PowerPoint presentation templates</li>
+<li>Lab-specific presentation templates</li>
+<li>University-branded poster and slide templates</li>
+</ul>
+<p>Within PennSIVE and other research groups, lab members often maintain <strong>unofficial Penn-branded poster and slide templates</strong> that can serve as useful starting points for presentations and conference posters. Be sure to verify any institutional branding requirements before using these templates for official presentations.</p>
+</section>
+<section id="general-figure-design-principles" class="level2">
+<h2 class="anchored" data-anchor-id="general-figure-design-principles">General Figure Design Principles</h2>
+<p>Regardless of the software used, effective scientific figures should:</p>
+<ul>
+<li>Clearly communicate one primary message</li>
+<li>Avoid unnecessary visual clutter</li>
+<li>Use readable fonts and appropriately sized labels</li>
+<li>Maintain consistent colors and formatting across figures</li>
+<li>Include informative legends and figure captions when appropriate</li>
+<li>Be interpretable without extensive explanation in the accompanying text</li>
+</ul>
+</section>
+<section id="export-recommendations" class="level2">
+<h2 class="anchored" data-anchor-id="export-recommendations">Export Recommendations</h2>
+<p>Choosing the appropriate file format is an important final step when preparing figures, posters, or presentations. Different formats are optimized for different purposes.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 55%">
+<col style="width: 19%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Output</th>
+<th>Recommended Format</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Figures for manuscripts</td>
+<td>PDF or SVG</td>
+<td>Preserves vector graphics for high-quality publication.</td>
+</tr>
+<tr class="even">
+<td>Conference posters</td>
+<td>PDF</td>
+<td>Preferred by most printing services.</td>
+</tr>
+<tr class="odd">
+<td>Presentation slides</td>
+<td>PPTX or PDF</td>
+<td>PPTX for editing; PDF for presenting or sharing.</td>
+</tr>
+<tr class="even">
+<td>Images</td>
+<td>PNG</td>
+<td>High-resolution raster image suitable for presentations and web use.</td>
+</tr>
+<tr class="odd">
+<td>Photographs</td>
+<td>JPEG</td>
+<td>Smaller file size, but not recommended for figures containing text.</td>
+</tr>
+</tbody>
+</table>
+<section id="what-is-svg" class="level3">
+<h3 class="anchored" data-anchor-id="what-is-svg">What is SVG?</h3>
+<p><strong>Scalable Vector Graphics (SVG)</strong> is a vector-based image format commonly used when exporting figures from software such as R (<code>ggplot2</code>) or Adobe Illustrator. Unlike raster formats such as PNG or JPEG, SVG images can be resized without losing image quality, making them ideal for publication-quality figures and posters.</p>
+<p>When possible, export plots from R as <strong>PDF</strong> or <strong>SVG</strong> before making edits in Adobe Illustrator.</p>
 </section>
 </section>
 <section id="example-workflow-in-pennsive" class="level2">
-<h2 class="anchored" data-anchor-id="example-workflow-in-pennsive">Example workflow in PennSIVE</h2>
+<h2 class="anchored" data-anchor-id="example-workflow-in-pennsive">Example Workflow in PennSIVE</h2>
+<p>A typical workflow might look like:</p>
 <ol type="1">
-<li>Analyze data and generate plots through ggplot2 in R</li>
-<li>Export figures as PDF</li>
+<li>Analyze data and generate plots in R using packages such as <code>ggplot2</code></li>
+<li>Export figures as PDF or SVG files</li>
 <li>Refine and combine figures in Adobe Illustrator</li>
-<li>Create diagrams to help visualize simulation structure and results</li>
-<li>Assemble into a final presentation in Adobe InDesign</li>
+<li>Create conceptual diagrams or workflow illustrations in BioRender</li>
+<li>Assemble posters or presentations in Adobe InDesign or PowerPoint using an appropriate template</li>
+<li>Export the final poster as a PDF and submit it for printing.</li>
 </ol>
 </section>
 <section id="links-to-data-visualization-resources" class="level2">
 <h2 class="anchored" data-anchor-id="links-to-data-visualization-resources">Links to Data Visualization Resources</h2>
+<section id="software" class="level3">
+<h3 class="anchored" data-anchor-id="software">Software</h3>
 <ul>
 <li><a href="https://www.adobe.com/products/illustrator.html">Adobe Illustrator</a></li>
 <li><a href="https://www.biorender.com/">BioRender</a></li>
 <li><a href="https://www.adobe.com/products/indesign.html">Adobe InDesign</a></li>
 </ul>
+</section>
+</section>
+<section id="poster-printing" class="level2">
+<h2 class="anchored" data-anchor-id="poster-printing">Poster Printing</h2>
+<p>PennSIVE commonly uses <strong>SlideMakers</strong> for conference poster printing.</p>
+<p><strong>Email:</strong> <a href="mailto:posters@slidemakers.net" class="email">posters@slidemakers.net</a></p>
+<p>When submitting a poster for printing, CC:</p>
+<ul>
+<li>PI name</li>
+<li>Business Office Rep Name</li>
+</ul>
+<p>A typical email should include the following information:</p>
+<pre class="text"><code>Would you print this poster please?
+
+Poster size:
+Material:
+Delivery date:
+Name:
+Organization:
+Delivery address:
+Cell number:</code></pre>
+<p>Before submitting your poster, verify:</p>
+<ul>
+<li>Poster dimensions are correct.</li>
+<li>The poster has been exported as a high-resolution PDF.</li>
+<li>All figures and text appear correctly after exporting.</li>
+<li>The requested delivery date allows sufficient printing time.</li>
+</ul>
+</section>
+<section id="poster-and-slide-templates-1" class="level2">
+<h2 class="anchored" data-anchor-id="poster-and-slide-templates-1">Poster and Slide Templates</h2>
+<p>Using an existing template can save significant time when preparing conference posters or presentations. Rather than designing layouts from scratch, templates provide a consistent structure, formatting, and branding.</p>
+<section id="available-templates" class="level3">
+<h3 class="anchored" data-anchor-id="available-templates">Available Templates</h3>
+<ul>
+<li><a href="https://www.overleaf.com/1216716794yfgvhygqcsnc#59613a">PennSIVE Overleaf Poster Template</a></li>
+<li><a href="https://docs.google.com/presentation/d/1M2b0Ol9a-3MA9RSE6ogMcI6cAELjXnoc/edit?usp=sharing&amp;ouid=111089011874061202278&amp;rtpof=true&amp;sd=true">PennSIVE Google Slides / Presentation Template</a></li>
+<li>Within our <a href="upenn.app.box.com/">Penn Box</a>, under PennSIVE Lab Share Folders &gt; Poster Logo and Lab Presentation Template, you will see several other presentation templates to choose from.</li>
+</ul>
+<p>These templates have been shared by PennSIVE lab members and can serve as a useful starting point for conference posters, lab presentations, and research talks. Users are encouraged to make their own copy before editing. Furthermore, within the PennSIVE Lab Share Folders, under “Poster Logo and Lab Presentation Template”, there are more templates that are available for use/editing.</p>
 
 
+</section>
 </section>
 </section>
 
