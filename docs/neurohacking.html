@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>workflows – PennSIVE Wiki</title>
+<title>neurohacking – PennSIVE Wiki</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -22,41 +22,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -161,7 +126,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./workflows.html">Nipype workflows</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./neurohacking.html">Neurohacking</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -217,7 +182,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./workflows.html" class="sidebar-item-text sidebar-link active">
+  <a href="./workflows.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Nipype workflows</span></a>
   </div>
 </li>
@@ -271,7 +236,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./neurohacking.html" class="sidebar-item-text sidebar-link">
+  <a href="./neurohacking.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Neurohacking</span></a>
   </div>
 </li>
@@ -297,7 +262,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#nipype-workflows" id="toc-nipype-workflows" class="nav-link active" data-scroll-target="#nipype-workflows">Nipype workflows</a></li>
+  <li><a href="#neurohacking" id="toc-neurohacking" class="nav-link active" data-scroll-target="#neurohacking">Neurohacking</a>
+  <ul class="collapse">
+  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#core-components" id="toc-core-components" class="nav-link" data-scroll-target="#core-components">Core Components</a>
+  <ul class="collapse">
+  <li><a href="#neuroimaging-data" id="toc-neuroimaging-data" class="nav-link" data-scroll-target="#neuroimaging-data">Neuroimaging Data</a></li>
+  <li><a href="#processing-pipelines" id="toc-processing-pipelines" class="nav-link" data-scroll-target="#processing-pipelines">Processing Pipelines</a></li>
+  <li><a href="#visualization" id="toc-visualization" class="nav-link" data-scroll-target="#visualization">Visualization</a></li>
+  </ul></li>
+  <li><a href="#neurohacking-in-r" id="toc-neurohacking-in-r" class="nav-link" data-scroll-target="#neurohacking-in-r">Neurohacking in R</a></li>
+  <li><a href="#applications" id="toc-applications" class="nav-link" data-scroll-target="#applications">Applications</a></li>
+  <li><a href="#example-of-what-you-can-do-with-neurohacking" id="toc-example-of-what-you-can-do-with-neurohacking" class="nav-link" data-scroll-target="#example-of-what-you-can-do-with-neurohacking">Example of what you can do with Neurohacking!</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -307,97 +286,107 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<section id="nipype-workflows" class="level1">
-<h1>Nipype workflows</h1>
-<p>Many neuroimaging tools have idiosyncratic CLIs that are clumsy to use from programming languages like python and R. Nipype provides a unified interface that facilitates the design of workflows within and between packages, lowering the learning curve necessary to use a new package.</p>
-<p>Nipype interfaces consist of an input and output specification class, <code>_run_interface</code> method, and <code>_list_outputs</code>. To validate inputs are the requested type and outputs get created correctly, nipype uses a package called Traits to automate much of the process. When the <code>.run()</code> method is called on an instance of your interface, the <code>_run_interface</code> method is called, and <code>_list_outputs</code> is used to list the files matched against the output specification. For example, an interface that simply moves a file might look like</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MoveResultFileInputSpec(BaseInterfaceInputSpec):</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    in_file <span class="op">=</span> File(exists<span class="op">=</span><span class="va">True</span>, desc<span class="op">=</span><span class="st">'input file to be renamed'</span>, mandatory<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    output_name <span class="op">=</span> traits.String(desc<span class="op">=</span><span class="st">'output name string'</span>)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MoveResultFileOutputSpec(TraitedSpec):</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    out_file <span class="op">=</span> File(desc<span class="op">=</span><span class="st">'path of moved file'</span>)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MoveResultFile(BaseInterface):</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    input_spec <span class="op">=</span> MoveResultFileInputSpec</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    output_spec <span class="op">=</span> MoveResultFileOutputSpec</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _run_interface(<span class="va">self</span>, runtime):</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        shutil.copyfile(<span class="va">self</span>.inputs.in_file, <span class="va">self</span>.inputs.output_name)</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> runtime</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _list_outputs(<span class="va">self</span>):</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>        outputs <span class="op">=</span> <span class="va">self</span>._outputs().get()</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>        outputs[<span class="st">'out_file'</span>] <span class="op">=</span> <span class="va">self</span>.inputs.output_name</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> outputs</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>A slightly more complex example, which thresholds an input image with nibabel might look like:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nipype.interfaces.base <span class="im">import</span> BaseInterface, <span class="op">\</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    BaseInterfaceInputSpec, traits, File, TraitedSpec</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nipype.utils.filemanip <span class="im">import</span> split_filename</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> nibabel <span class="im">as</span> nb</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SimpleThresholdInputSpec(BaseInterfaceInputSpec):</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    volume <span class="op">=</span> File(exists<span class="op">=</span><span class="va">True</span>, desc<span class="op">=</span><span class="st">'volume to be thresholded'</span>, mandatory<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    threshold <span class="op">=</span> traits.Float(desc<span class="op">=</span><span class="st">'everything below this value will be set to zero'</span>,</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>                             mandatory<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SimpleThresholdOutputSpec(TraitedSpec):</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    thresholded_volume <span class="op">=</span> File(exists<span class="op">=</span><span class="va">True</span>, desc<span class="op">=</span><span class="st">"thresholded volume"</span>)</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SimpleThreshold(BaseInterface):</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    input_spec <span class="op">=</span> SimpleThresholdInputSpec</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    output_spec <span class="op">=</span> SimpleThresholdOutputSpec</span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _run_interface(<span class="va">self</span>, runtime):</span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>        fname <span class="op">=</span> <span class="va">self</span>.inputs.volume</span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>        img <span class="op">=</span> nb.load(fname)</span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>        data <span class="op">=</span> np.array(img.get_data())</span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>        active_map <span class="op">=</span> data <span class="op">&gt;</span> <span class="va">self</span>.inputs.threshold</span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>        thresholded_map <span class="op">=</span> np.zeros(data.shape)</span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>        thresholded_map[active_map] <span class="op">=</span> data[active_map]</span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>        new_img <span class="op">=</span> nb.Nifti1Image(thresholded_map, img.affine, img.header)</span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>        _, base, _ <span class="op">=</span> split_filename(fname)</span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>        nb.save(new_img, base <span class="op">+</span> <span class="st">'_thresholded.nii'</span>)</span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> runtime</span>
-<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _list_outputs(<span class="va">self</span>):</span>
-<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>        outputs <span class="op">=</span> <span class="va">self</span>._outputs().get()</span>
-<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>        fname <span class="op">=</span> <span class="va">self</span>.inputs.volume</span>
-<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>        _, base, _ <span class="op">=</span> split_filename(fname)</span>
-<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>        outputs[<span class="st">"thresholded_volume"</span>] <span class="op">=</span> os.path.abspath(base <span class="op">+</span> <span class="st">'_thresholded.nii'</span>)</span>
-<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> outputs</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>When writing workflows, most of the time a tool will already have an interface, see the nipype <a href="https://nipype.readthedocs.io/en/latest/interfaces.html">interfaces index</a> for a complete list. A workflow will typically begin by parsing command line arguments</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>parser <span class="op">=</span> argparse.ArgumentParser()</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>parser.add_argument(<span class="st">'-i'</span>, <span class="st">'--input'</span>, <span class="bu">type</span><span class="op">=</span><span class="bu">str</span>, default<span class="op">=</span><span class="st">'T1W.nii.gz'</span>)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>parser.add_argument(<span class="st">'-o'</span>, <span class="st">'--output'</span>, <span class="bu">type</span><span class="op">=</span><span class="bu">str</span>, default<span class="op">=</span><span class="st">'/tmp/tmp'</span>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>args <span class="op">=</span> parser.parse_args()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>setup a workflow and interface node:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>wf <span class="op">=</span> Workflow(<span class="st">'threshold'</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>thresh_phase <span class="op">=</span> Node(SimpleThreshold(), <span class="st">'thresh_phase'</span>)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>thresh_phase.inputs.volume <span class="op">=</span> args.<span class="bu">input</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>thresh_phase.inputs.threshold <span class="op">=</span> <span class="fl">0.5</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>then another node, connected to the first</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>move_phase <span class="op">=</span> Node(MoveResultFile(), <span class="st">'move_phase'</span>)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>move_phase.inputs.output_name <span class="op">=</span> args.output</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>wf.<span class="ex">connect</span>([(thresh_phase, move_phase, [(<span class="st">'out_file'</span>, <span class="st">'input_image'</span>)])])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<!-- ## ANTS
-## FSL
-## Freesurfer -->
-<!-- talk about using nipype through reticulate -->
+<section id="neurohacking" class="level1">
+<h1>Neurohacking</h1>
+<p>Created by: Gina Yu</p>
+<p>Last Updated: July 30,2026</p>
+<p>Neurohacking, in the context of PennSIVE and computational neuroscience, refers to the use of computational tools to manipulate, process, and analyze neuroimaging data such as MRI scans. Within PennSIVE, these workflows are commonly taught using R. This approach focuses on practical, reproducible workflows for working with brain imaging data, including reading image formats, performing preprocessing steps, and generating visualizations for analysis and interpretation.</p>
+<p><a href="https://www.coursera.org/learn/neurohacking">Neurohacking in R Coursera Course</a></p>
+<p>The best way to learn about neurohacking in R is through the official Coursera course taught by instructors from Johns Hopkins from the link above.</p>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>Modern neurohacking workflows are centered around structural MRI data and commonly use standardized formats such as NIfTI. Using R and specialized packages, researchers can:</p>
+<ul>
+<li>Read and write brain imaging data<br>
+</li>
+<li>Explore and visualize brain structures<br>
+</li>
+<li>Perform preprocessing steps such as brain extraction and image correction<br>
+</li>
+<li>Align images across subjects or to standard templates</li>
+</ul>
+<p>These workflows allow us to manipulate raw imaging data to analyzable and interpretable outputs.</p>
+<p>Common packages used throughout neurohacking workflows include packages from the <code>neuroconductor</code> and <code>neurobase</code> ecosystems, which provide tools for reading, processing, visualizing, and analyzing neuroimaging data.</p>
+</section>
+<section id="core-components" class="level2">
+<h2 class="anchored" data-anchor-id="core-components">Core Components</h2>
+<section id="neuroimaging-data" class="level3">
+<h3 class="anchored" data-anchor-id="neuroimaging-data">Neuroimaging Data</h3>
+<p>Neurohacking primarily works with MRI data, which captures structural information about the brain. These images are stored in formats like NIfTI, designed for efficient storage and analysis of multidimensional brain data.</p>
+</section>
+<section id="processing-pipelines" class="level3">
+<h3 class="anchored" data-anchor-id="processing-pipelines">Processing Pipelines</h3>
+<p>A typical neurohacking pipeline includes several key steps:</p>
+<ul>
+<li><strong>Inhomogeneity correction</strong> – adjusting for intensity variations in MRI scans<br>
+</li>
+<li><strong>Brain extraction (skull stripping)</strong> – isolating brain tissue from non-brain structures<br>
+</li>
+<li><strong>Image registration</strong> – aligning images within or across subjects<br>
+</li>
+<li><strong>Segmentation</strong> – identifying tissue types such as gray matter, white matter, and CSF</li>
+</ul>
+<p>These steps ensure that data are standardized and suitable for downstream analysis.</p>
+</section>
+<section id="visualization" class="level3">
+<h3 class="anchored" data-anchor-id="visualization">Visualization</h3>
+<p>Visualization is a critical part of neurohacking. R provides tools to:</p>
+<ul>
+<li>Display 2D slices of brain images<br>
+</li>
+<li>Generate 3D brain visualizations<br>
+</li>
+<li>Map statistical results onto brain regions</li>
+</ul>
+<p>Visualization helps researchers interpret spatial patterns in neural data and communicate results effectively.</p>
+</section>
+</section>
+<section id="neurohacking-in-r" class="level2">
+<h2 class="anchored" data-anchor-id="neurohacking-in-r">Neurohacking in R</h2>
+<p>R is commonly used in neurohacking due to its strong ecosystem for data analysis and reproducibility. Neurohacking workflows in R typically involve:</p>
+<ul>
+<li>Loading neuroimaging data into R environments<br>
+</li>
+<li>Applying transformations and preprocessing steps<br>
+</li>
+<li>Using packages for visualization and statistical analysis<br>
+</li>
+<li>Creating reproducible scripts and pipelines</li>
+</ul>
+</section>
+<section id="applications" class="level2">
+<h2 class="anchored" data-anchor-id="applications">Applications</h2>
+<p>Neurohacking techniques are used in a range of research contexts, including:</p>
+<ul>
+<li>Studying brain structure and anatomy<br>
+</li>
+<li>Investigating neurological and psychiatric conditions<br>
+</li>
+<li>Developing and testing imaging pipelines<br>
+</li>
+<li>Visualizing brain-based statistical results</li>
+</ul>
+<p>By combining programming with neuroimaging, neurohacking enables more efficient and scalable analysis of complex brain data.</p>
+</section>
+<section id="example-of-what-you-can-do-with-neurohacking" class="level2">
+<h2 class="anchored" data-anchor-id="example-of-what-you-can-do-with-neurohacking">Example of what you can do with Neurohacking!</h2>
+<p>Here we have an image of a brain slice from an MRI scan that is a grayscale image with a black background at intensity = 0. This example demonstrates several common image preprocessing techniques. Starting from a raw MRI slice, intensity transformations can improve image contrast, while Gaussian smoothing reduces image noise and improves visualization. These preprocessing steps are commonly performed before downstream statistical analyses or image segmentation. Then, smoothing can be utilized to “smooth” out the noise in the picture through techniques such as Gaussian smoothing.</p>
+<p><img src="images/neurohacking/example.png" class="img-fluid"></p>
+</section>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<p>Neurohacking represents the intersection of neuroscience, data science, and programming. By leveraging tools like R, researchers can process, analyze, and visualize brain imaging data in a reproducible and scalable way, forming the foundation for modern neuroimaging workflows.</p>
+<p>For practical examples of running neuroimaging workflows on the PennSIVE computing environment, see the Cluster Computing and Data Visualization sections of this wiki.</p>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<ol type="1">
+<li><p>Image from Visualizing Brains Using R. Medium. <a href="https://medium.com/data-science/visualizing-brains-using-r-606fa0fb9fdf">Website for image</a></p></li>
+<li><p>Coursera course for Neurohacking in R. <a href="https://www.coursera.org/learn/neurohacking">Neurohacking in R Coursera Course</a></p></li>
+</ol>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

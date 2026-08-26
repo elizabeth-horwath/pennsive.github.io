@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>workflows – PennSIVE Wiki</title>
+<title>cluster-screen – PennSIVE Wiki</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -161,7 +161,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./workflows.html">Nipype workflows</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cluster-screen.html">Using <code>screen</code> on the Cluster</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -217,7 +217,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./workflows.html" class="sidebar-item-text sidebar-link active">
+  <a href="./workflows.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Nipype workflows</span></a>
   </div>
 </li>
@@ -241,7 +241,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./cluster-screen.html" class="sidebar-item-text sidebar-link">
+  <a href="./cluster-screen.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Using <code>screen</code> on the Cluster</span></a>
   </div>
 </li>
@@ -297,7 +297,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#nipype-workflows" id="toc-nipype-workflows" class="nav-link active" data-scroll-target="#nipype-workflows">Nipype workflows</a></li>
+  <li><a href="#using-screen-on-the-cluster" id="toc-using-screen-on-the-cluster" class="nav-link active" data-scroll-target="#using-screen-on-the-cluster">Using <code>screen</code> on the Cluster</a>
+  <ul class="collapse">
+  <li><a href="#screen-terminology" id="toc-screen-terminology" class="nav-link" data-scroll-target="#screen-terminology">Screen terminology:</a></li>
+  </ul></li>
+  <li><a href="#quick-reference" id="toc-quick-reference" class="nav-link" data-scroll-target="#quick-reference">Quick Reference</a></li>
+  <li><a href="#starting-a-screen-session" id="toc-starting-a-screen-session" class="nav-link" data-scroll-target="#starting-a-screen-session">Starting a <code>screen</code> Session</a>
+  <ul class="collapse">
+  <li><a href="#first-ssh-into-the-takim2-cluster" id="toc-first-ssh-into-the-takim2-cluster" class="nav-link" data-scroll-target="#first-ssh-into-the-takim2-cluster">First, SSH into the Takim2 cluster</a></li>
+  <li><a href="#working-inside-a-screen-session" id="toc-working-inside-a-screen-session" class="nav-link" data-scroll-target="#working-inside-a-screen-session">Working Inside a <code>screen</code> Session</a></li>
+  </ul></li>
+  <li><a href="#managing-existing-screen-sessions" id="toc-managing-existing-screen-sessions" class="nav-link" data-scroll-target="#managing-existing-screen-sessions">Managing Existing <code>screen</code> Sessions</a></li>
+  <li><a href="#best-practices" id="toc-best-practices" class="nav-link" data-scroll-target="#best-practices">Best Practices</a></li>
+  <li><a href="#example-workflow" id="toc-example-workflow" class="nav-link" data-scroll-target="#example-workflow">Example Workflow</a></li>
+  <li><a href="#troubleshooting" id="toc-troubleshooting" class="nav-link" data-scroll-target="#troubleshooting">Troubleshooting</a>
+  <ul class="collapse">
+  <li><a href="#recovering-after-a-disconnect" id="toc-recovering-after-a-disconnect" class="nav-link" data-scroll-target="#recovering-after-a-disconnect">Recovering After a Disconnect</a></li>
+  <li><a href="#session-already-attached" id="toc-session-already-attached" class="nav-link" data-scroll-target="#session-already-attached">Session Already Attached</a></li>
+  <li><a href="#managing-existing-sessions" id="toc-managing-existing-sessions" class="nav-link" data-scroll-target="#managing-existing-sessions">Managing Existing Sessions</a></li>
+  </ul></li>
+  <li><a href="#in-summary" id="toc-in-summary" class="nav-link" data-scroll-target="#in-summary">In Summary</a></li>
   </ul>
 </nav>
     </div>
@@ -307,95 +326,182 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<section id="nipype-workflows" class="level1">
-<h1>Nipype workflows</h1>
-<p>Many neuroimaging tools have idiosyncratic CLIs that are clumsy to use from programming languages like python and R. Nipype provides a unified interface that facilitates the design of workflows within and between packages, lowering the learning curve necessary to use a new package.</p>
-<p>Nipype interfaces consist of an input and output specification class, <code>_run_interface</code> method, and <code>_list_outputs</code>. To validate inputs are the requested type and outputs get created correctly, nipype uses a package called Traits to automate much of the process. When the <code>.run()</code> method is called on an instance of your interface, the <code>_run_interface</code> method is called, and <code>_list_outputs</code> is used to list the files matched against the output specification. For example, an interface that simply moves a file might look like</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MoveResultFileInputSpec(BaseInterfaceInputSpec):</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    in_file <span class="op">=</span> File(exists<span class="op">=</span><span class="va">True</span>, desc<span class="op">=</span><span class="st">'input file to be renamed'</span>, mandatory<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    output_name <span class="op">=</span> traits.String(desc<span class="op">=</span><span class="st">'output name string'</span>)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MoveResultFileOutputSpec(TraitedSpec):</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    out_file <span class="op">=</span> File(desc<span class="op">=</span><span class="st">'path of moved file'</span>)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MoveResultFile(BaseInterface):</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    input_spec <span class="op">=</span> MoveResultFileInputSpec</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    output_spec <span class="op">=</span> MoveResultFileOutputSpec</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _run_interface(<span class="va">self</span>, runtime):</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        shutil.copyfile(<span class="va">self</span>.inputs.in_file, <span class="va">self</span>.inputs.output_name)</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> runtime</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _list_outputs(<span class="va">self</span>):</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>        outputs <span class="op">=</span> <span class="va">self</span>._outputs().get()</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>        outputs[<span class="st">'out_file'</span>] <span class="op">=</span> <span class="va">self</span>.inputs.output_name</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> outputs</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>A slightly more complex example, which thresholds an input image with nibabel might look like:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nipype.interfaces.base <span class="im">import</span> BaseInterface, <span class="op">\</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    BaseInterfaceInputSpec, traits, File, TraitedSpec</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nipype.utils.filemanip <span class="im">import</span> split_filename</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> nibabel <span class="im">as</span> nb</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SimpleThresholdInputSpec(BaseInterfaceInputSpec):</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    volume <span class="op">=</span> File(exists<span class="op">=</span><span class="va">True</span>, desc<span class="op">=</span><span class="st">'volume to be thresholded'</span>, mandatory<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    threshold <span class="op">=</span> traits.Float(desc<span class="op">=</span><span class="st">'everything below this value will be set to zero'</span>,</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>                             mandatory<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SimpleThresholdOutputSpec(TraitedSpec):</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    thresholded_volume <span class="op">=</span> File(exists<span class="op">=</span><span class="va">True</span>, desc<span class="op">=</span><span class="st">"thresholded volume"</span>)</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SimpleThreshold(BaseInterface):</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    input_spec <span class="op">=</span> SimpleThresholdInputSpec</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    output_spec <span class="op">=</span> SimpleThresholdOutputSpec</span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _run_interface(<span class="va">self</span>, runtime):</span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>        fname <span class="op">=</span> <span class="va">self</span>.inputs.volume</span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>        img <span class="op">=</span> nb.load(fname)</span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>        data <span class="op">=</span> np.array(img.get_data())</span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>        active_map <span class="op">=</span> data <span class="op">&gt;</span> <span class="va">self</span>.inputs.threshold</span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>        thresholded_map <span class="op">=</span> np.zeros(data.shape)</span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>        thresholded_map[active_map] <span class="op">=</span> data[active_map]</span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>        new_img <span class="op">=</span> nb.Nifti1Image(thresholded_map, img.affine, img.header)</span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>        _, base, _ <span class="op">=</span> split_filename(fname)</span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>        nb.save(new_img, base <span class="op">+</span> <span class="st">'_thresholded.nii'</span>)</span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> runtime</span>
-<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _list_outputs(<span class="va">self</span>):</span>
-<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>        outputs <span class="op">=</span> <span class="va">self</span>._outputs().get()</span>
-<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>        fname <span class="op">=</span> <span class="va">self</span>.inputs.volume</span>
-<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>        _, base, _ <span class="op">=</span> split_filename(fname)</span>
-<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>        outputs[<span class="st">"thresholded_volume"</span>] <span class="op">=</span> os.path.abspath(base <span class="op">+</span> <span class="st">'_thresholded.nii'</span>)</span>
-<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> outputs</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>When writing workflows, most of the time a tool will already have an interface, see the nipype <a href="https://nipype.readthedocs.io/en/latest/interfaces.html">interfaces index</a> for a complete list. A workflow will typically begin by parsing command line arguments</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>parser <span class="op">=</span> argparse.ArgumentParser()</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>parser.add_argument(<span class="st">'-i'</span>, <span class="st">'--input'</span>, <span class="bu">type</span><span class="op">=</span><span class="bu">str</span>, default<span class="op">=</span><span class="st">'T1W.nii.gz'</span>)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>parser.add_argument(<span class="st">'-o'</span>, <span class="st">'--output'</span>, <span class="bu">type</span><span class="op">=</span><span class="bu">str</span>, default<span class="op">=</span><span class="st">'/tmp/tmp'</span>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>args <span class="op">=</span> parser.parse_args()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>setup a workflow and interface node:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>wf <span class="op">=</span> Workflow(<span class="st">'threshold'</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>thresh_phase <span class="op">=</span> Node(SimpleThreshold(), <span class="st">'thresh_phase'</span>)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>thresh_phase.inputs.volume <span class="op">=</span> args.<span class="bu">input</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>thresh_phase.inputs.threshold <span class="op">=</span> <span class="fl">0.5</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>then another node, connected to the first</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>move_phase <span class="op">=</span> Node(MoveResultFile(), <span class="st">'move_phase'</span>)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>move_phase.inputs.output_name <span class="op">=</span> args.output</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>wf.<span class="ex">connect</span>([(thresh_phase, move_phase, [(<span class="st">'out_file'</span>, <span class="st">'input_image'</span>)])])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<!-- ## ANTS
-## FSL
-## Freesurfer -->
-<!-- talk about using nipype through reticulate -->
+<section id="using-screen-on-the-cluster" class="level1">
+<h1>Using <code>screen</code> on the Cluster</h1>
+<p>Created by: Gina Yu</p>
+<p>Last Updated: July 30,2026</p>
+<p><code>screen</code> is a terminal utility that allows you to keep terminal sessions running in the background, even after you disconnect from the cluster, close your terminal, or lose your SSH connection.</p>
+<p><code>screen</code> can be used to:</p>
+<ul>
+<li>Keep commands running in the background</li>
+<li>Run long-running jobs or scripts</li>
+<li>Maintain remote terminal sessions</li>
+<li>Monitor interactive analyses over time</li>
+<li>Return to the same terminal session at a later time</li>
+<li>Organize multiple terminal sessions simultaneously</li>
+</ul>
+<p>This page assumes that you are already familiar with logging into the cluster through SSH. For a broader introduction to cluster computing, please see the <a href="./cluster_intro.html">Cluster Computing</a> page.</p>
+<section id="screen-terminology" class="level2">
+<h2 class="anchored" data-anchor-id="screen-terminology">Screen terminology:</h2>
+<p>A screen session can have one of two states:</p>
+<ul>
+<li><p><strong>Attached</strong> — You are currently connected to the session.</p></li>
+<li><p><strong>Detached</strong> — The session is still running, but no terminal is currently connected to it.</p></li>
+</ul>
+<p>Detached sessions continue running until they are explicitly terminated. A detached session is <strong>still active</strong> and any programs running inside it will continue executing.</p>
+</section>
+</section>
+<section id="quick-reference" class="level1">
+<h1>Quick Reference</h1>
+<p>The table below summarizes the most commonly used <code>screen</code> commands.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Task</th>
+<th>Command</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Start a new session</td>
+<td><code>screen</code></td>
+</tr>
+<tr class="even">
+<td>Start a named session</td>
+<td><code>screen -S my_session</code></td>
+</tr>
+<tr class="odd">
+<td>List active sessions</td>
+<td><code>screen -ls</code></td>
+</tr>
+<tr class="even">
+<td>Reattach to a session</td>
+<td><code>screen -r my_session</code></td>
+</tr>
+<tr class="odd">
+<td>Force reattach to a session</td>
+<td><code>screen -d -r my_session</code></td>
+</tr>
+<tr class="even">
+<td>Kill a session</td>
+<td><code>screen -S my_session -X quit</code></td>
+</tr>
+<tr class="odd">
+<td>Detach from a session</td>
+<td><strong>Ctrl + A</strong>, then <strong>D</strong></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="starting-a-screen-session" class="level1">
+<h1>Starting a <code>screen</code> Session</h1>
+<section id="first-ssh-into-the-takim2-cluster" class="level2">
+<h2 class="anchored" data-anchor-id="first-ssh-into-the-takim2-cluster">First, SSH into the Takim2 cluster</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> yourPennKey@takim2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Replace <code>yourPennKey</code> with your actual PennKey.</p>
+<p>After logging in, your terminal should look similar to:</p>
+<pre class="text"><code>yourPennKey@takim2 ~$</code></pre>
+<p>To start a new <code>screen</code> session, simply type:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">screen</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Alternatively, you can create a named session, which is recommended if you plan to have multiple sessions:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">screen</span> <span class="at">-S</span> my_session</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="working-inside-a-screen-session" class="level2">
+<h2 class="anchored" data-anchor-id="working-inside-a-screen-session">Working Inside a <code>screen</code> Session</h2>
+<p>Once inside a <code>screen</code> session, you can use the terminal just as you normally would after logging into the cluster.</p>
+<p>For example, you can:</p>
+<ul>
+<li>Start an interactive R session by typing <code>R</code></li>
+<li>Run scripts such as <code>Rscript analysis.R</code> or <code>python script.py</code></li>
+<li>Navigate directories using commands such as <code>cd my_project</code></li>
+<li>Submit jobs using <code>bsub</code></li>
+<li>Monitor log files or other running processes</li>
+</ul>
+<p>Think of a <code>screen</code> session as a terminal that remains active even after you disconnect.</p>
+<blockquote class="blockquote">
+<p><strong>Note:</strong> <code>screen</code> does not provide additional computing resources. It simply keeps your terminal session alive. For computationally intensive jobs requiring specific CPU or memory resources, use the cluster scheduler with <code>bsub</code>.</p>
+</blockquote>
+<p>To leave a <code>screen</code> session without stopping the commands running inside it, press:</p>
+<p><strong>Ctrl + A</strong>, then <strong>D</strong></p>
+<p>This detaches the session while allowing any running commands to continue executing in the background.</p>
+</section>
+</section>
+<section id="managing-existing-screen-sessions" class="level1">
+<h1>Managing Existing <code>screen</code> Sessions</h1>
+<p>To view all active <code>screen</code> sessions, type:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">screen</span> <span class="at">-ls</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The output will look similar to:</p>
+<pre><code>123456.pts-2.takim2 (Detached)</code></pre>
+<p>where:</p>
+<ul>
+<li><code>123456</code> is the session ID.</li>
+<li><code>(Detached)</code> indicates that the session is still running in the background.</li>
+</ul>
+<p>To reconnect to a session, type:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">screen</span> <span class="at">-r</span> 123456</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>or, if you named your session:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">screen</span> <span class="at">-r</span> my_session</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>To permanently end a session, type:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">screen</span> <span class="at">-S</span> 123456 <span class="at">-X</span> quit</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>or simply type <code>exit</code> from within the session.</p>
+<p>If multiple <code>screen</code> sessions are active, the output may look similar to:</p>
+<p>Example output:</p>
+<pre class="text"><code>There are screens on:
+    123456.analysis    (Detached)
+    987654.testing     (Detached)
+
+2 Sockets in /run/screen/S-yourPennKey.</code></pre>
+</section>
+<section id="best-practices" class="level1">
+<h1>Best Practices</h1>
+<p>To keep your workspace organized, it is recommended to remove <code>screen</code> sessions that are no longer needed.</p>
+<p>Unused sessions can:</p>
+<ul>
+<li>Continue running programs that consume CPU, memory, or other cluster resources</li>
+<li>Create clutter by accumulating detached sessions</li>
+<li>Make it more difficult to identify active work when using <code>screen -ls</code></li>
+</ul>
+<p>Using descriptive session names (e.g., <code>screen -S simulation</code>) can also make it easier to manage multiple sessions.</p>
+</section>
+<section id="example-workflow" class="level1">
+<h1>Example Workflow</h1>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> yourPennKey@takim2</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="ex">screen</span> <span class="at">-S</span> analysis</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="ex">R</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Run your analysis as usual.</p>
+<p>When you want to disconnect without stopping your work:</p>
+<ul>
+<li>Press <strong>Ctrl + A</strong>, then <strong>D</strong></li>
+</ul>
+<p>Later, reconnect by logging back into the cluster and running:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">screen</span> <span class="at">-r</span> analysis</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="troubleshooting" class="level1">
+<h1>Troubleshooting</h1>
+<section id="recovering-after-a-disconnect" class="level2">
+<h2 class="anchored" data-anchor-id="recovering-after-a-disconnect">Recovering After a Disconnect</h2>
+<p>If your internet connection drops or you accidentally close your terminal, your <code>screen</code> session will continue running on the cluster.</p>
+<p>Simply reconnect to the cluster using SSH:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> yourPennKey@takim2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Then list your available sessions:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">screen</span> <span class="at">-ls</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Finally, reconnect to your session:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">screen</span> <span class="at">-r</span> my_session</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="session-already-attached" class="level2">
+<h2 class="anchored" data-anchor-id="session-already-attached">Session Already Attached</h2>
+<p>If <code>screen</code> reports that a session is already attached, you can force it to detach from the previous terminal and reconnect to your current one:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">screen</span> <span class="at">-d</span> <span class="at">-r</span> my_session</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="managing-existing-sessions" class="level2">
+<h2 class="anchored" data-anchor-id="managing-existing-sessions">Managing Existing Sessions</h2>
+<p>To terminate the current <code>screen</code> session from within the session itself, simply type:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="bu">exit</span> </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="in-summary" class="level1">
+<h1>In Summary</h1>
+<p><code>screen</code> is especially useful for interactive work where you expect to reconnect later. For non-interactive analyses or jobs requiring substantial computational resources, submitting a job through the cluster scheduler (<code>bsub</code>) is generally the preferred approach.</p>
 
 
 </section>

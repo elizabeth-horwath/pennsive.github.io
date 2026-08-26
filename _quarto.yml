@@ -27,14 +27,17 @@ website:
     - flywheel.markdown
     - pipelines.markdown
     - reproducibility.markdown
+    - data-visualization-and-presentation-templates.qmd
     - workflows.markdown
     - cluster_intro.markdown
     - bash_startup.qmd
     - cluster_rstudio.qmd
+    - cluster-screen.qmd
     - gpu-computing.markdown
     - rpackages.markdown
     - python.md
     - pennsive_neuro_pip_instructions.qmd
+    - neurohacking.qmd
     - containers.qmd
     - contributing.qmd
 
