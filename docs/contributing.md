@@ -16,7 +16,7 @@ Thanks for considering a contribution! You'll need:
 
 Fork [pennsive/pennsive.github.io](https://github.com/pennsive/pennsive.github.io) (button in the upper-right corner):
 
-![How to Fork](images/contributing/forking.png)
+![How to Fork](images/contributing/fork.png)
 
 Then clone your fork:
 
@@ -143,15 +143,17 @@ git checkout <your-branch-name> && git merge main
 
 Then open a pull request from your fork on GitHub:
 
-![Starting a pull request](images/contributing/pr_start.png)
+![Starting a pull request](images/contributing/open-pr.png)
 
 Check that your branch is being compared against `pennsive/pennsive.github.io`'s `main`, describe your changes, and submit:
 
-![Preparing a pull request](images/contributing/pr_prepare.png)
+![Preparing a pull request](images/contributing/create-pr.png)
 
 A maintainer will review your PR and may ask for changes. 
 
-![Pull Request Submitted](images/contributing/pr_submitted.png)
+![Pull Request Submitted](images/contributing/pr-opened.png)
+
+If you need to make changes, just commit and push to your branch again. The PR will update automatically.
 
 ## Congratulations
 
