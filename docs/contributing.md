@@ -83,7 +83,7 @@ Pages don't appear automatically. You will need to add an entry to the `nav` lis
 Similarly, add a link to your page in the appropriate section of `docs/index.md` so that it appears on the Welcome page.
 
 !!! important
-    `docs/index.md` is written as raw HTML, not Markdown — the `[text](file.md)` link syntax from step 4 will silently fail to render there (it'll just show up as plain, unclickable text). Use a plain HTML link instead:
+    `docs/index.md` is written as raw HTML, not Markdown. Use a plain HTML link:
 
     ```html
     <li><a href="my-topic.md">My Topic</a></li>
@@ -154,6 +154,10 @@ A maintainer will review your PR and may ask for changes.
 ![Pull Request Submitted](images/contributing/pr-opened.png)
 
 If you need to make changes, just commit and push to your branch again. The PR will update automatically.
+
+After a maintainer approves your PR, you will be able to merge it into `main`:
+
+![Merge Approved Pull Request](images/contributing/pr-approved.png)
 
 ## Congratulations
 

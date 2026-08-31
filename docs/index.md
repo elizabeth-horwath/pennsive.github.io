@@ -44,9 +44,11 @@ hide:
   <div class="two-col-list">
     <ul>
       <li><a href="environment_setup.md">Bash, Cluster Environment, and Passwordless SSH Setup</a></li>
+      <li><a href="bhosts_wiki.md">Hosts and Queues on the HPC Cluster</a></li>
       <li><a href="wiki-jobs.md">Submitting Jobs</a></li>
       <li><a href="cluster-screen.md">Using Screen on the Cluster</a></li>
       <li><a href="cluster_organization.md">Cluster Organization</a></li>
+      <li><a href="programming_overview_wiki.md">R, Python, and Bash in Neuroimaging Analysis</a></li>
       <li><a href="containers.md">Containers</a></li>
       <li><a href="github.md">Git & GitHub Basics</a></li>
       <li><a href="wiki-ides.md">Using IDEs on the Cluster</a></li>
@@ -92,9 +94,11 @@ hide:
     <li><a href="bids.md">BIDS</a></li>
     <li><a href="fmriprep.md">fMRIPrep</a></li>
     <li><a href="neurohacking.md">Neurohacking</a></li>
+    <li><a href="surface_data_overview.md">Surface-based Neuroimaging Analyses</a></li>
     <li><a href="data-visualization-and-presentation-templates.md">Data Visualization Tools and Presentation Templates</a></li>
     <li><a href="project_management.md">Project Management Resources</a></li>
     <li><a href="personal_website.md">Building A Personal Website With GitHub Pages</a></li>
+    <li><a href="other_resources.md">Other Helpful Resources</a></li>
   </ul>
   </div>
 
@@ -107,7 +111,7 @@ hide:
 
 # A Community Effort
 
-<p class="contributor-note">Many thanks to all the contributors who helped build this resource!</p>
+<p class="contributor-note">Many thanks to all the contributors who helped build this resource!</p> 
 
 <div class="contributors">
 
@@ -139,11 +143,18 @@ hide:
     <img src="images/contributors/gabrielle.jpeg">
   </div>
 
+  <div class="contributor" data-name="Wendy Wen">
+    <img src="images/contributors/wendy.jpg">
+  </div>
+
   <div class="contributor" data-name="Gina Yu">
     <img src="images/contributors/gina.png">
   </div>
   
 </div>
+
+<p class="contributor-note">We also thank all previous PennSIVE members who made prior versions of this wiki that we built upon :)</p>
+
 <br>
 <p class="wiki-group-note">On behalf of the PennSIVE Wiki Group</p>
 

@@ -707,6 +707,4 @@ apptainer run --cleanenv -B /scratch -B $PWD:/data --pwd /data image.sif command
 
 ## Sources
 
-- Previous version of PennSIVE Wiki. "Bash Setup." https://pennsive.github.io/bash_startup.html
-- Previous version of PennSIVE Wiki. "Environment setup." https://pennsive.github.io/environments.html
 - StrongDM. "How to Set Up SSH Passwordless Login (Step-by-Step Tutorial)." https://www.strongdm.com/blog/ssh-passwordless-login

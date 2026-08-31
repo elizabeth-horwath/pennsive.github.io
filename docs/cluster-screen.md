@@ -214,3 +214,6 @@ exit
 
 ## In Summary
 `screen` is especially useful for interactive work where you expect to reconnect later. For non-interactive analyses or jobs requiring substantial computational resources, submitting a job through the cluster scheduler (`bsub`) is generally the preferred approach.
+
+`screen` is especially useful for interactive work where you expect to reconnect later. For non-interactive analyses or jobs requiring substantial computational resources, submitting a job through the cluster scheduler (`bsub`) is generally the preferred approach.
+For more information on `bsub`, please refer to [Submitting Jobs](wiki-jobs.md).

@@ -19,7 +19,7 @@ When you log into the cluster via a login node, interactive jobs can be submitte
 ibash
 ```
 
-Once the job starts, your terminal session will be transferred to an interactive shell on the compute node (e.g., `pennsive01`), where you can start an R session as usual by running `R` in the terminal. Refer to the [Cluster Packages](cluster_packages.md) page for basics about R sessions and package management on the cluster.
+Once the job starts, your terminal session will be transferred to an interactive shell on the compute node (e.g., `pennsive01`), where you can start an R session as usual by running `R` in the terminal. Refer to the pages for basics about [R sessions](programming_overview_wiki.md) and [package management](cluster_packages.md) on the cluster.
 
 ### Batch Jobs
 
