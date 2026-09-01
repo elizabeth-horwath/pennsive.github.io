@@ -1,6 +1,6 @@
 ---
 author: "Elizabeth Horwath"
-date: 2026-08-27
+date: 2026-09-01
 ---
 
 # MIMoSA
@@ -19,21 +19,27 @@ These examples will run the pipeline in batch mode on the cluster. To run indivi
 
 <br> <u>Required flags:</u>
 
-[-m or --mainpath]{style="font-family:menlo; color:black; font-size:16px;"}: path to parent data folder<br> [-t or --t1]{style="font-family:menlo; color:black; font-size:16px;"}: T1 sequence name<br> [-f or --flair]{style="font-family:menlo; color:black; font-size:16px;"}: FLAIR sequence name<br> [--toolpath]{style="font-family:menlo; color:black; font-size:16px;"}: path to pipeline folder<br>
+<span style="font-family:menlo; color:black; font-size:16px;">-m or \--mainpath</span>: path to parent data folder<br>
+<span style="font-family:menlo; color:black; font-size:16px;">-t or --t1</span>: T1 sequence name<br>
+<span style="font-family:menlo; color:black; font-size:16px;">-f or --flair</span>: FLAIR sequence name<br>
+<span style="font-family:menlo; color:black; font-size:16px;">--toolpath</span>: path to pipeline folder<br>
 
 <u>Other flags:</u>
 
-[-p or --participant]{style="font-family:menlo; color:black; font-size:16px;"}: participant ID (only needed for individual mode)<br> [--ses]{style="font-family:menlo; color:black; font-size:16px;"}: session ID (only needed for individual mode)<br> 
-[--t2]{style="font-family:menlo; color:black; font-size:16px;"}: T2 sequence name<br> 
-[-n or --n4]{style="font-family:menlo; color:black; font-size:16px;"}: run N4 bias correction. Default is TRUE<br> 
-[-s or --skullstripping]{style="font-family:menlo; color:black; font-size:16px;"}: run skullstripping. Default is TRUE<br> 
-[--stype]{style="font-family:menlo; color:black; font-size:16px;"}: skullstripping method: hdbet, fslbet. Default is hdbet<br> 
-[-r or --registration]{style="font-family:menlo; color:black; font-size:16px;"}: run registration. Default is TRUE<br> 
-[-w or --whitestripe]{style="font-family:menlo; color:black; font-size:16px;"}: run WhiteStripe normalization. Default is TRUE<br> [--threshold]{style="font-family:menlo; color:black; font-size:16px;"}: threshold for generating mimosa mask. Default is 0.2<br> [--mode]{style="font-family:menlo; color:black; font-size:16px;"}: run pipeline individually or batch. Default is batch<br> 
-[-c or --container]{style="font-family:menlo; color:black; font-size:16px;"}: which container to use: singularity, docker, local, cluster. Default is cluster<br> 
-[--sinpath]{style="font-family:menlo; color:black; font-size:16px;"}: path to singularity image (only needed if using singularity container - don't need to specify if using takim cluster)<br> 
-[--dockerpath]{style="font-family:menlo; color:black; font-size:16px;"}: path to docker image (only needed if using docker container)<br> 
-[-h or --help]{style="font-family:menlo; color:black; font-size:16px;"}: show help message<br> <br>
+<span style="font-family:menlo; color:black; font-size:16px;">-p or --participant</span>: participant ID (only needed for individual mode)<br>
+<span style="font-family:menlo; color:black; font-size:16px;">--ses</span>: session ID (only needed for individual mode)<br>
+<span style="font-family:menlo; color:black; font-size:16px;">--t2</span>: T2 sequence name<br>
+<span style="font-family:menlo; color:black; font-size:16px;">-n or --n4</span>: run N4 bias correction. Default is TRUE<br>
+<span style="font-family:menlo; color:black; font-size:16px;">-s or --skullstripping</span>: run skullstripping. Default is TRUE<br>
+<span style="font-family:menlo; color:black; font-size:16px;">--stype</span>: skullstripping method: hdbet, fslbet. Default is hdbet<br>
+<span style="font-family:menlo; color:black; font-size:16px;">-r or --registration</span>: run registration. Default is TRUE<br>
+<span style="font-family:menlo; color:black; font-size:16px;">-w or --whitestripe</span>: run WhiteStripe normalization. Default is TRUE<br>
+<span style="font-family:menlo; color:black; font-size:16px;">--threshold</span>: threshold for generating mimosa mask. Default is 0.2<br>
+<span style="font-family:menlo; color:black; font-size:16px;">--mode</span>: run pipeline individually or batch. Default is batch<br>
+<span style="font-family:menlo; color:black; font-size:16px;">-c or --container</span>: which container to use: singularity, docker, local, cluster. Default is cluster<br>
+<span style="font-family:menlo; color:black; font-size:16px;">--sinpath</span>: path to singularity image (only needed if using singularity container - don't need to specify if using takim cluster)<br>
+<span style="font-family:menlo; color:black; font-size:16px;">--dockerpath</span>: path to docker image (only needed if using docker container)<br>
+<span style="font-family:menlo; color:black; font-size:16px;">-h or --help</span>: show help message<br>
 
 ``` sh
 bash /path/to/PennSIVE_neuro_pip/pipelines/mimosa/code/bash/mimosa.sh -m /path/to/data -t "*T1w*.nii.gz" -f "*FLAIR*.nii.gz" --toolpath /path/to/PennSIVE_neuro_pip 

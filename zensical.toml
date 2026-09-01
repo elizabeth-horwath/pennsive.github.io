@@ -5,6 +5,11 @@ site_description = "Internal wiki for PennSIVE tutorials and best practices."
 
 nav = [
   { "Welcome" = "index.md" },
+  { "Admin" = [
+    { "Onboarding" = "onboarding.md" },
+    { "General Admin Details" = "general_admin.md" },
+    { "Conference/Travel" = "conference_travel.md" },
+  ] },
   { "Computing Basics" = [
     { "Bash, Cluster Environment, and Passwordless SSH Setup" = "environment_setup.md" },
     { "Hosts and Queues on the HPC Cluster" = "bhosts_wiki.md" },
@@ -42,11 +47,6 @@ nav = [
     { "Cluster Packages" = "cluster_packages.md" },
     { "Personal Website" = "personal_website.md" },
     { "Other Helpful Resources" = "other_resources.md" },
-  ] },
-  { "Admin" = [
-    { "Onboarding" = "onboarding.md" },
-    { "General Admin Details" = "general_admin.md" },
-    { "Conference/Travel" = "conference_travel.md" },
   ] },
   { "Contributing" = "contributing.md" },
   { "Source" = "https://github.com/PennSIVE/pennsive.github.io" },

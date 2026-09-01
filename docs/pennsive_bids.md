@@ -1,11 +1,11 @@
 ---
 author: "Elizabeth Horwath"
-date: 2026-03-17
+date: 2026-09-01
 ---
 
 # BIDS
 
-The [PennSIVE BIDS pipeline](https://github.com/PennSIVE/PennSIVE_neuro_pip/tree/main/pipelines/bids) is based on the Brain Imaging Data Structure (BIDS) standards. For more details about the BIDS process and guidelines, please refer to the [BIDS page - **LINK HERE**]. 
+The [PennSIVE BIDS pipeline](https://github.com/PennSIVE/PennSIVE_neuro_pip/tree/main/pipelines/bids) is based on the Brain Imaging Data Structure (BIDS) standards. For more details about the BIDS process and guidelines, please refer to the [BIDS page](bids.md). 
 
 This pipeline provides convenient heuristic customization through an RShiny app to organize data into BIDS format. It uses heudiconv for DICOM to NIFTI conversion.
 
@@ -45,7 +45,9 @@ bash /path/to/PennSIVE_neuro_pip/pipelines/bids/code/bash/bids_curation.sh -m /p
 <br>
 
 ### <u>Step 2. Customization</u>
-In this step, an RShiny app will launch to customize the heuristic template created in the last step. **This step only runs in batch mode and does not need a container specification. If you are unable to connect to the app from your terminal, try running this step in VSCode.
+In this step, an RShiny app will launch to customize the heuristic template created in the last step. 
+
+*This step only runs in batch mode and does not need a container specification. If you are unable to connect to the app from your terminal, try running this step in VSCode.
 
 <br>
 <u>Required flags:</u>
