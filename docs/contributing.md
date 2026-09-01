@@ -163,11 +163,11 @@ The wiki group will get notified of your PR and review it.
 
 If you need to make changes before the PR gets reviewed, just commit and push to your branch again. The PR will update automatically.
 
-After a maintainer approves your PR, you will be able to merge it into `main`:
+After the wiki group approves your PR, you will be able to merge it into `main`:
 
 ![Merge Approved Pull Request](images/contributing/pr-approved.png)
 
-If this option is not available, a maintainer will merge it for you.
+If this option is not available, we will merge it for you.
 
 ## Congratulations
 
