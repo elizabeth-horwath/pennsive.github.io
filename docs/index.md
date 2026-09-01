@@ -153,7 +153,7 @@ hide:
   
 </div>
 
-<p class="contributor-note">We also thank all previous PennSIVE members who made prior versions of this wiki that we built upon :)</p>
+<p class="contributor-note">We also thank all previous PennSIVE members who made prior versions of this wiki that we built upon.</p>
 
 <br>
 <p class="wiki-group-note">On behalf of the PennSIVE Wiki Group</p>
