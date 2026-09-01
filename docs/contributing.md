@@ -153,11 +153,13 @@ A maintainer will review your PR and may ask for changes.
 
 ![Pull Request Submitted](images/contributing/pr-opened.png)
 
-If you need to make changes, just commit and push to your branch again. The PR will update automatically.
+If you need to make changes before the PR gets reviewed, just commit and push to your branch again. The PR will update automatically.
 
 After a maintainer approves your PR, you will be able to merge it into `main`:
 
 ![Merge Approved Pull Request](images/contributing/pr-approved.png)
+
+If this option is not available, a maintainer will merge it for you.
 
 ## Congratulations
 
