@@ -145,13 +145,21 @@ Then open a pull request from your fork on GitHub:
 
 ![Starting a pull request](images/contributing/open-pr.png)
 
-Check that your branch is being compared against `pennsive/pennsive.github.io`'s `main`, describe your changes, and submit:
+Make sure that your branch is being compared against `pennsive/pennsive.github.io`'s `main`. If you can't see your branch as an option, click on "compare across forks":
+
+![Compare across forks](images/contributing/compare-forks.png)
+
+Click on "create pull request" after you have selected the correct branches:
+
+![Select branches](images/contributing/select-branches.png)
+
+Then, describe your changes, and submit:
 
 ![Preparing a pull request](images/contributing/create-pr.png)
 
-A maintainer will review your PR and may ask for changes. 
-
 ![Pull Request Submitted](images/contributing/pr-opened.png)
+
+The wiki group will get notified of your PR and review it. 
 
 If you need to make changes before the PR gets reviewed, just commit and push to your branch again. The PR will update automatically.
 
