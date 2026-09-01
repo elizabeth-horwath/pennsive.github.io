@@ -155,19 +155,13 @@ Click on "create pull request" after you have selected the correct branches:
 
 In the **Reviewers** section of the sidebar, add the **PennSIVE/wiki** team so the wiki group is notified (this isn't automatic, so please don't skip it).
 
-Then, describe your changes, and submit:
+Describe your changes, and submit:
 
-![Preparing a pull request](images/contributing/create-pr.png)
-
-![Pull Request Submitted](images/contributing/pr-opened.png)
+![Select reviewers](images/contributing/select-reviewer-create-pr.png)
 
 If you need to make changes before the PR gets reviewed, just commit and push to your branch again. The PR will update automatically.
 
-After the wiki group reviews and approves your PR, you will be able to merge it into `main`:
-
-![Merge Approved Pull Request](images/contributing/pr-approved.png)
-
-If this option is not available, we will merge it for you.
+After the wiki group reviews and approves your PR, you will be able to merge it into `main`. If this option is not available, the reviewer will merge it for you.
 
 ## Congratulations
 
